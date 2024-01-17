@@ -9,7 +9,9 @@ namespace DesafioRodonaves.Infra.Ioc.Repository
     {
         internal static IServiceCollection AddServiceRepository(this IServiceCollection services)
         {
-            //services.AddScoped<, >();
+            services.AddScoped<IUnitRepository, UnitRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICollaboratorRepository, CollaboratorRepository>();
 
             return services;
         }
