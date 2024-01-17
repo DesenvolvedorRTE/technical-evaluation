@@ -3,6 +3,10 @@ using Microsoft.Extensions.Configuration;
 using DesafioRodonaves.Infra.Ioc.DbContext;
 using DesafioRodonaves.Infra.Ioc.FluentValidation;
 using DesafioRodonaves.Infra.Ioc.UnitOfWorkDependecy;
+using DesafioRodonaves.Infra.Ioc.Services;
+using DesafioRodonaves.Infra.Ioc.Repository;
+using DesafioRodonaves.Infra.Ioc.GlobalExecptions;
+using Microsoft.AspNetCore.Builder;
 
 namespace DesafioRodonaves.Infra.Ioc
 {
@@ -13,13 +17,22 @@ namespace DesafioRodonaves.Infra.Ioc
 
             services.AddServiceDbContext(configuration);
 
-            services.AddServiceFluentValidation();
+            services.AddServiceRepository();
+            services.AddServices();
 
+            services.AddServiceFluentValidation();
+            services.AddServiceGlobalExecptions();
             services.AddServiceUnitOfWork();
-        
+
+            services.AddServices();
 
             return services;
 
+        }
+        public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder builder, IConfiguration config)
+        {
+            builder.UseGlobalExceptionMiddleware();
+            return builder;
         }
     }
 }

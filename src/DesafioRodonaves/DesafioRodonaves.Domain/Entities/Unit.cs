@@ -8,6 +8,8 @@ namespace DesafioRodonaves.Domain.Entities
         
         public string UnitCode { get; set; }
 
+        public bool Status { get; set; }
+
         // Propriedade de navageção
         public Collaborator CollaboratorNavigation { get; set; }
 

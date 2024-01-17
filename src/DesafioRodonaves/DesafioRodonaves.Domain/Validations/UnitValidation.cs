@@ -19,6 +19,10 @@ namespace DesafioRodonaves.Domain.Validations
               .NotNull()
               .MaximumLength(150);
 
+            RuleFor(x => x.Status)
+             .NotEmpty()
+             .NotNull();
+
         }
     }
 }

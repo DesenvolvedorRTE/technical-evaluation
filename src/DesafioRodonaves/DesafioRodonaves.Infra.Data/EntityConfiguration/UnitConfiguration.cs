@@ -17,7 +17,7 @@ namespace DesafioRodonaves.Infra.Data.EntityConfiguration
 
             builder.Property(x => x.UnitCode).IsRequired().HasMaxLength(100).HasColumnName("codigo_da_unidade");
             builder.Property(x => x.UnitName).IsRequired().HasMaxLength(150).HasColumnName("nome_da_unidade");
-
+            builder.Property(x => x.Status).IsRequired().HasDefaultValue(true).HasColumnName("status");
 
             // Configuração da relação 1 para 1 entre Unit e Collaborator
             builder.HasOne(u => u.CollaboratorNavigation)

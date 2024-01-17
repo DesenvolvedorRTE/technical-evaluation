@@ -7,12 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DesafioRodonaves.Domain\DesafioRodonaves.Domain.csproj" />
+    <PackageReference Include="Mapster" Version="7.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Serilog" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\DesafioRodonaves.Domain\DesafioRodonaves.Domain.csproj" />
+    <ProjectReference Include="..\DesafioRodonaves.Infra.Data\DesafioRodonaves.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>
