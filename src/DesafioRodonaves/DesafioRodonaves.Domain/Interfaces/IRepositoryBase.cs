@@ -9,8 +9,8 @@ namespace DesafioRodonaves.Domain.Interfaces
 
         Task Create(TEntity entity);
 
-        Task Update(TEntity entity);
+        void Update(TEntity entity);
 
-        Task Delete(TEntity entity);
+        void Delete(TEntity entity);
     }
 }
