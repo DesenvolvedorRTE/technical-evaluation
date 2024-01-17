@@ -1,5 +1,5 @@
-﻿
-using DesafioRodonaves.Application.DTOS;
+﻿using DesafioRodonaves.Application.Commads.Request.Unit;
+using DesafioRodonaves.Application.Commads.Response.Unit;
 using DesafioRodonaves.Application.Interfaces;
 using DesafioRodonaves.Domain.Commons.Execptions;
 using DesafioRodonaves.Domain.Entities;
@@ -8,6 +8,7 @@ using DesafioRodonaves.Domain.Validations;
 using DesafioRodonaves.Infra.Data.Context;
 using FluentValidation;
 using Mapster;
+
 
 namespace DesafioRodonaves.Application.Services
 {
@@ -24,7 +25,7 @@ namespace DesafioRodonaves.Application.Services
             _validations = validations;
         }
 
-        public async Task<string> Create(UnitDTO entity)
+        public async Task<string> Create(CreateUnitDTORequest entity)
         {
             var unit = entity.Adapt<Unit>();
             var unitValidation = await _validations.ValidateAsync(unit);
@@ -44,28 +45,39 @@ namespace DesafioRodonaves.Application.Services
             return $"Id da nova unidade: {unit.Id}";
         }
 
-        public void Delete(UnitDTO entity)
+        public async Task<string> Delete(int id)
         {
-            throw new NotImplementedException();
+            var unitId = await _unitRepository.GetById(id);
+
+            if (unitId is null)
+                throw new NotFoundException($"Unidade com id ({id}), não encontrada");
+
+            _unitRepository.Delete(unitId);
+            await _uow.Commit();
+
+            return $"Unidade com id ({id}), foi excluida com sucesso!";
+            
         }
 
-        public Task<IEnumerable<UnitDTO>> GetAll()
+        public async Task<IEnumerable<GetAllUnitDTOResponse>> GetAll()
         {
-            throw new NotImplementedException();
+           var unitResponse =  await _unitRepository.GetAll();
+
+            return unitResponse.Adapt<IEnumerable<GetAllUnitDTOResponse>>();
         }
 
-        public async Task<UnitDTO> GetById(int id)
+        public async Task<GetUnitByIdDTOResponse> GetById(int id)
         {
             // Busca unit e por id e verifica se ela existe.
             var unitId = await _unitRepository.GetById(id);
 
             if (unitId is null)
-                throw new NotFoundException("Unidade não encontrada");
+                throw new NotFoundException($"Unidade com id ({id}), não foi encontrada");
 
-            return unitId.Adapt<UnitDTO>();
+            return unitId.Adapt<GetUnitByIdDTOResponse>();
         }
 
-        public async Task<string> Update(UnitDTO entity, int id)
+        public async Task<string> Update(UpdateUnitDtoRequest entity, int id)
         {
             var unitId = await _unitRepository.GetById(id);
       
