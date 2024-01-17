@@ -16,7 +16,7 @@ namespace DesafioRodonaves.Infra.Ioc
             services.AddServiceFluentValidation();
 
             services.AddServiceUnitOfWork();
-
+        
 
             return services;
 

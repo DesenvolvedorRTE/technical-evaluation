@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioRodonaves.Infra.Data
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioRodonaves.Infra.Ioc", "DesafioRodonaves.Infra.Ioc\DesafioRodonaves.Infra.Ioc.csproj", "{B703093A-14B9-4655-A675-55A6F6E13FC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioRodonaves.MVC", "DesafioRodonaves.MVC\DesafioRodonaves.MVC.csproj", "{B734A7AF-B757-49B5-AB00-6A3B1FE3F182}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioRodonaves.MVC", "DesafioRodonaves.MVC\DesafioRodonaves.MVC.csproj", "{B734A7AF-B757-49B5-AB00-6A3B1FE3F182}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioRodonaves.Application", "DesafioRodonaves.Application\DesafioRodonaves.Application.csproj", "{CA79E5C7-665F-4543-9DCA-F6406E13FC7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B734A7AF-B757-49B5-AB00-6A3B1FE3F182}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B734A7AF-B757-49B5-AB00-6A3B1FE3F182}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B734A7AF-B757-49B5-AB00-6A3B1FE3F182}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA79E5C7-665F-4543-9DCA-F6406E13FC7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA79E5C7-665F-4543-9DCA-F6406E13FC7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA79E5C7-665F-4543-9DCA-F6406E13FC7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA79E5C7-665F-4543-9DCA-F6406E13FC7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

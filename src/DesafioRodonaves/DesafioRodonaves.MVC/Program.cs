@@ -1,3 +1,4 @@
+using DesafioRodonaves.Application.Services;
 using DesafioRodonaves.Infra.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,7 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
     // Add services to the container.
     builder.Services.AddControllersWithViews();
 
-    // Adicona os serviços de injeção de depêndencia.
+    // Adiciona serviço de documentação do swagger
+    builder.Services.AddSwaggerGen();
+
+    // Adiciona os serviços de injeção de depêndencia.
     builder.Services.AddInfrastructure(builder.Configuration);
 }
 
@@ -13,12 +17,15 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 {
     // Configure the HTTP request pipeline.
-    if (!app.Environment.IsDevelopment())
+    if (app.Environment.IsDevelopment())
     {
-        app.UseExceptionHandler("/Home/Error");
-        // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-        app.UseHsts();
+        app.UseSwagger();
+        app.UseSwaggerUI();
+
+        // Se estiver no ambiente de desenvolvimento, inicie/crie o contêiner PostgreSQL
+        Task.Run(() => StartPostgresContainerService.StartPostgresContainer()).Wait();
     }
+
 
     app.UseHttpsRedirection();
     app.UseStaticFiles();
@@ -27,9 +34,7 @@ var app = builder.Build();
 
     app.UseAuthorization();
 
-    app.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
+    app.MapControllers();
 
     app.Run();
 

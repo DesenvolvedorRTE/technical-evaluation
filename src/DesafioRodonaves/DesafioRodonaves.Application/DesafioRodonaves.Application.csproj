@@ -8,14 +8,14 @@
 
   <ItemGroup>
     <PackageReference Include="Docker.DotNet" Version="3.125.15" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DesafioRodonaves.Application\DesafioRodonaves.Application.csproj" />
     <ProjectReference Include="..\DesafioRodonaves.Domain\DesafioRodonaves.Domain.csproj" />
-    <ProjectReference Include="..\DesafioRodonaves.Infra.Data\DesafioRodonaves.Infra.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
 
 </Project>
