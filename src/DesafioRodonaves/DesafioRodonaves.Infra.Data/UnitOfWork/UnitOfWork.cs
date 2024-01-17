@@ -1,7 +1,7 @@
 ﻿using DesafioRodonaves.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace DesafioRodonaves.Infra.Data.UnitOfWord
+namespace DesafioRodonaves.Infra.Data.UnitOfWork
 {
     public class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext> where TDbContext : DbContext
     {
