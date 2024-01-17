@@ -14,6 +14,7 @@ namespace DesafioRodonaves.Infra.Data.Context
         public DbSet<Unit> Units { get; set; }
 
         public DbSet<User> Users { get; set; }
+
         public DbSet<Collaborator> Collaborators { get; set; }
 
 

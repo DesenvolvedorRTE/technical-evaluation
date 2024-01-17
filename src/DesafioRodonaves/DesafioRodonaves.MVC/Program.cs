@@ -1,4 +1,3 @@
-using DesafioRodonaves.Application.Services;
 using DesafioRodonaves.Infra.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,8 +20,6 @@ var app = builder.Build();
     {
         app.UseSwagger();
         app.UseSwaggerUI();
-
-        Task.Run(() => StartPostgresContainerService.StartPostgresContainer());
         
     }
 
