@@ -9,7 +9,7 @@ namespace DesafioRodonaves.Domain.Entities
         public string UnitCode { get; set; }
 
         // Propriedade de navageção
-        public Collaborator Collaborator { get; set; }
+        public Collaborator CollaboratorNavigation { get; set; }
 
        
     }

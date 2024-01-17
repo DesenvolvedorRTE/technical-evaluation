@@ -8,13 +8,13 @@ namespace DesafioRodonaves.Domain.Entities
         public string Name { get; set; }
 
         // Relacionamento com a unidade
-        public Unit Unit { get; set; }  
+        public Unit UnitNavigation { get; set; }  // Renomeada para 'UnitNavigation'
         public int UnitId { get; set; }
 
-        // Relacionamento com a usuario
-        public User User { get; set; }
-        public int UserId { get; set; } 
+        // Relacionamento com o usuário
+        public User UserNavigation { get; set; }  // Renomeada para 'UserNavigation'
+        public int UserId { get; set; }
 
-        
+
     }
 }

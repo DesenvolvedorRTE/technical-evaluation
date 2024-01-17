@@ -22,8 +22,8 @@ var app = builder.Build();
         app.UseSwagger();
         app.UseSwaggerUI();
 
-        // Se estiver no ambiente de desenvolvimento, inicie/crie o contêiner PostgreSQL
-        Task.Run(() => StartPostgresContainerService.StartPostgresContainer()).Wait();
+        Task.Run(() => StartPostgresContainerService.StartPostgresContainer());
+        
     }
 
 

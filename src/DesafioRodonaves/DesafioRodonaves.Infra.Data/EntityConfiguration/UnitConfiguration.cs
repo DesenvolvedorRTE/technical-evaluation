@@ -9,19 +9,19 @@ namespace DesafioRodonaves.Infra.Data.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Unit> builder)
         {
+            // Define o nome da tabela
+            builder.ToTable("unidades");
 
             // Configura a geração de id pelo banco de dados
-            builder.Property(x => x.Id).IsRequired().HasColumnName("id");
-
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Property(x => x.Id).ValueGeneratedOnAdd().HasColumnName("id");
 
             builder.Property(x => x.UnitCode).IsRequired().HasMaxLength(100).HasColumnName("codigo_da_unidade");
             builder.Property(x => x.UnitName).IsRequired().HasMaxLength(150).HasColumnName("nome_da_unidade");
 
 
             // Configuração da relação 1 para 1 entre Unit e Collaborator
-            builder.HasOne(u => u.Collaborator)
-                .WithOne(c => c.Unit)
+            builder.HasOne(u => u.CollaboratorNavigation)
+                .WithOne(c => c.UnitNavigation)
                 .HasForeignKey<Collaborator>(u => u.Id)
                 .IsRequired();
            
