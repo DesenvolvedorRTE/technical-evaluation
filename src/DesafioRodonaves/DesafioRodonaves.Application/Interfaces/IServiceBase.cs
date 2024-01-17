@@ -9,7 +9,7 @@ namespace DesafioRodonaves.Application.Interfaces
 
         Task<string> Create(TEntity entity);
 
-        void Update(TEntity entity);
+        Task<string> Update(TEntity entity, int id);
 
         void Delete(TEntity entity);
     }

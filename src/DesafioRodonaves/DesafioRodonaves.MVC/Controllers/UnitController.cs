@@ -27,5 +27,11 @@ namespace DesafioRodonaves.MVC.Controllers
         {
             return await _unitService.Create(unit);
         }
+
+        [HttpPut("UpdateUnit/{id:int}")]
+        public async Task<string> UpdateUnit([FromBody] UnitDTO unit, int id)
+        {
+            return await _unitService.Update(unit, id);
+        }
     }
 }

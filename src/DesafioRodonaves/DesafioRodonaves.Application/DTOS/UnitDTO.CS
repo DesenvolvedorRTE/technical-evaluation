@@ -8,11 +8,11 @@ namespace DesafioRodonaves.Application.DTOS
 {
     public class UnitDTO
     {
-        public string UnitName { get; set; }
+        public string? UnitName { get; set; }
 
-        public string UnitCode { get; set; }
+        public string? UnitCode { get; set; }
 
-        public bool Status { get; set; }
+        public bool? Status { get; set; }
 
     }
 }

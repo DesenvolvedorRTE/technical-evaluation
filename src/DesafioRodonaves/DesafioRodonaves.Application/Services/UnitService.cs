@@ -65,9 +65,44 @@ namespace DesafioRodonaves.Application.Services
             return unitId.Adapt<UnitDTO>();
         }
 
-        public void Update(UnitDTO entity)
+        public async Task<string> Update(UnitDTO entity, int id)
         {
-            throw new NotImplementedException();
+            var unitId = await _unitRepository.GetById(id);
+      
+            var propertyUnitName = await _unitRepository.PropertyUnitNameExists(entity.UnitName);
+            var propertyUnitCode = await _unitRepository.PropertyUnitNameExists(entity.UnitCode);
+
+            if (unitId is null)
+                throw new NotFoundException($"Unidade com id ({id}) não foi encontrada");
+
+            if(!string.IsNullOrEmpty(entity.UnitName))
+                unitId.UnitName = entity.UnitName;
+
+            if (!string.IsNullOrEmpty(entity.UnitCode))
+                unitId.UnitCode = entity.UnitCode;
+
+            if (!string.IsNullOrEmpty(entity.Status.ToString()))
+                unitId.Status = entity.Status;
+
+            if (propertyUnitName != null || propertyUnitCode != null)
+                throw new BadRequestException("Já existe uma unidade com estás informações de nome de unidade ou código da unidade");
+
+            if (propertyUnitName != null || propertyUnitCode != null)
+                throw new BadRequestException("Já existe uma unidade com estás informações de nome de unidade ou código da unidade");
+
+
+            var unitValidation = await _validations.ValidateAsync(unitId);
+
+            if (!unitValidation.IsValid)
+                throw new ValidationException(unitValidation.Errors);
+
+            _unitRepository.Update(unitId);
+            await _uow.Commit();
+
+
+            return $"Usário com id ({unitId.Id}), foi atualizado com sucesso";
+
+
         }
     }
 }
