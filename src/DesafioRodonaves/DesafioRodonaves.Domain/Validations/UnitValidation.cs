@@ -12,7 +12,7 @@ namespace DesafioRodonaves.Domain.Validations
           
             RuleFor(x => x.UnitCode)
                .NotEmpty()
-               .NotNull();
+               .NotNull().MaximumLength(100); 
 
             RuleFor(x => x.UnitName)
               .NotEmpty()
