@@ -20,8 +20,10 @@ namespace DesafioRodonaves.Infra.Data.EntityConfiguration
             builder.Property(x => x.Status).IsRequired().HasDefaultValue(true).HasColumnName("status");
 
             // Configuração da relação 1 para muitos entre Unit e Collaborator
-            builder.HasMany(u => u.CollaboratorNavigation)
-                .WithOne(c => c.UnitNavigation);
+            builder.HasMany(u => u.Collaborator)
+                .WithOne(c => c.Unit)
+                .HasForeignKey(u => u.UnitId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Configuração de index
             builder.HasIndex(x => x.UnitCode).IsUnique();

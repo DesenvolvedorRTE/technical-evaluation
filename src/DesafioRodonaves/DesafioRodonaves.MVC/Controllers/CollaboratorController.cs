@@ -1,9 +1,6 @@
 ﻿using DesafioRodonaves.Application.Commads.Request.Collaborator;
-using DesafioRodonaves.Application.Commads.Request.Unit;
-using DesafioRodonaves.Application.Commads.Request.User;
+using DesafioRodonaves.Application.Commads.Response.Collaborator;
 using DesafioRodonaves.Application.Interfaces;
-using DesafioRodonaves.Application.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DesafioRodonaves.MVC.Controllers
@@ -19,10 +16,36 @@ namespace DesafioRodonaves.MVC.Controllers
             _collaboratorService = collaboratorService;
         }
 
-        [HttpPost("CreateCollaborator")]
-        public async Task<string> CreateCollaborator([FromBody] CreateCollaboratorDTORequest unit)
+        [HttpGet("GetCollaboratorById/{id:int}")]
+        public async Task<GetCollaboratorByIdDTOResponse> GetCollaboratorById(int id)
         {
-            return await _collaboratorService.Create(unit);
+            return await _collaboratorService.GetById(id);
+        }
+
+        [HttpGet("GetAllCollaborator")]
+        public async Task<IEnumerable<GetAllCollaboratorDTOResponse>> GetAllCollaborator()
+        {
+            return await _collaboratorService.GetAll();
+        }
+
+        [HttpPost("CreateCollaborator")]
+        public async Task<string> CreateCollaborator([FromBody] CreateCollaboratorDTORequest collaborator)
+        {
+            return await _collaboratorService.Create(collaborator);
+        }
+
+        
+
+        [HttpPut("UpdateCollaborator/{id:int}")]
+        public async Task<string> UpdateCollaborator([FromBody] UpdateCollaboratorDTORequest collaborator, int id)
+        {
+            return await _collaboratorService.Update(collaborator, id);
+        }
+
+        [HttpDelete("DeleteCollaborator/{id:int}")]
+        public async Task<string> DeleteCollaborator(int id)
+        {
+            return await _collaboratorService.Delete(id);
         }
     }
 }

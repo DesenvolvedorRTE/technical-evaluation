@@ -1,5 +1,7 @@
 ﻿using DesafioRodonaves.Domain.Entities;
+using DesafioRodonaves.Infra.Data.EntityConfiguration;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 
 namespace DesafioRodonaves.Infra.Data.Context
@@ -22,7 +24,10 @@ namespace DesafioRodonaves.Infra.Data.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+            //builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+            builder.ApplyConfiguration(new CollaboratorConfiguration());
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new UnitConfiguration());
 
         }
     }

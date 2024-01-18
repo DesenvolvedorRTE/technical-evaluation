@@ -2,6 +2,7 @@
 using DesafioRodonaves.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 namespace DesafioRodonaves.Infra.Data.EntityConfiguration
 {
@@ -22,10 +23,6 @@ namespace DesafioRodonaves.Infra.Data.EntityConfiguration
 
             builder.Property(x => x.Status).IsRequired().HasDefaultValue(true).HasColumnName("status");
 
-            // Configuração da relação 1 para 1 entre user e Collaborator
-            builder.HasOne(u => u.CollaboratorNavigation)
-                .WithOne(c => c.UserNavigation)
-                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasIndex(x => x.Login).IsUnique();
 

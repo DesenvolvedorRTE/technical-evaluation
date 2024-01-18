@@ -11,14 +11,10 @@ namespace DesafioRodonaves.Infra.Ioc.DbContext
     {
         internal static IServiceCollection AddServiceDbContext(this IServiceCollection services, IConfiguration configuration )
         {
-            // Configurações banco de dados PostgreSql
-            //services.AddDbContext<ApplicationDbContext>(option => 
-            //    option.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
-            //        build => build.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
-
-                services.AddDbContext<ApplicationDbContext>(options =>
-              options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
-
+            //Configurações banco de dados PostgreSql
+            services.AddDbContext<ApplicationDbContext>(option =>
+                option.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
+                    build => build.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
             return services;
 
         }

@@ -9,8 +9,7 @@ using DesafioRodonaves.Domain.Validations;
 using DesafioRodonaves.Infra.Data.Context;
 using FluentValidation;
 using Mapster;
-using Microsoft.AspNetCore.Identity;
-using System.Xml.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace DesafioRodonaves.Application.Services
 {
@@ -23,6 +22,7 @@ namespace DesafioRodonaves.Application.Services
         private readonly IUnitRepository _unitRepository;
         private readonly IUnitOfWork<ApplicationDbContext> _uow;
         private readonly IPasswordManager _passwordManager;
+      
 
         public CollaboratorService(CollaboratorValidation collaboratorValidation, UserValidation userValidation, ICollaboratorRepository collaboratorRepository,
             IUserRepository userRepository, IUnitRepository unitRepository, IUnitOfWork<ApplicationDbContext> uow, IPasswordManager passwordManager)
@@ -104,24 +104,70 @@ namespace DesafioRodonaves.Application.Services
            
         }
 
-        public Task<string> Delete(int id)
+        public async Task<string> Delete(int id)
         {
-            throw new NotImplementedException();
+            var collaboratorId = await _collaboratorRepository.GetById(id);
+
+            if (collaboratorId is null)
+                throw new NotFoundException($"Colaborador com id ({id}), não foi encontrado");
+
+            // Excluir o usuario e o cobalorador associado a ele.
+            var userID = await _userRepository.GetById(id);
+
+            _userRepository.Delete(userID);
+            await _uow.Commit();
+
+            return $"Colaborador com id ({id}), foi removido com sucesso\n" +
+                $"Obs: O usuário relacionando a ele também foi excluido";
+
         }
 
-        public Task<IEnumerable<GetAllCollaboratorDTOResponse>> GetAll()
+        public async Task<IEnumerable<GetAllCollaboratorDTOResponse>> GetAll()
         {
-            throw new NotImplementedException();
+            var collaborators = await _collaboratorRepository.GetAll();
+
+            return collaborators.Adapt<IEnumerable<GetAllCollaboratorDTOResponse>>();
         }
 
-        public Task<GetCollaboratorByIdDTOResponse> GetById(int id)
+        public async Task<GetCollaboratorByIdDTOResponse> GetById(int id)
         {
-            throw new NotImplementedException();
+            var collaboratorId = await _collaboratorRepository.GetById(id);
+
+            if (collaboratorId is null)
+                throw new NotFoundException($"Colaborador com id ({id}), não foi encontrado");
+
+            return collaboratorId.Adapt<GetCollaboratorByIdDTOResponse>();
         }
 
-        public Task<string> Update(UpdateCollaboratorDTORequest entity, int id)
+        public async Task<string> Update(UpdateCollaboratorDTORequest entity, int id)
         {
-            throw new NotImplementedException();
+            var collaboratorId = await _collaboratorRepository.GetById(id);
+
+            if (collaboratorId is null)
+                throw new NotFoundException($"Colaborador com id ({id}), não foi encontrado");
+
+       
+            if (!string.IsNullOrEmpty(entity.Name))
+                collaboratorId.Name = entity.Name;
+
+            if (!string.IsNullOrEmpty(entity.UnitId.ToString()))
+            {
+                collaboratorId.UnitId = entity.UnitId;
+                var unitId = await _unitRepository.GetById(entity.UnitId.Value);
+
+                if (unitId == null)
+                    throw new NotFoundException($"A unidade com id ({entity.UnitId}) não existe, realize o cadastro da unidade em seu módulo");
+            }
+
+
+            var collaboratorValidation = await _collaboratorValidation.ValidateAsync(collaboratorId);
+
+            if (!collaboratorValidation.IsValid)
+                throw new ValidationException(collaboratorValidation.Errors);
+
+            _collaboratorRepository.Update(collaboratorId);
+
+            return $"Colaborador com id ({id}), foi atualizado com sucesso";
         }
     }
 }

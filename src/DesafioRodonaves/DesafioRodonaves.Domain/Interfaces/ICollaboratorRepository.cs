@@ -5,5 +5,6 @@ namespace DesafioRodonaves.Domain.Interfaces
 {
     public interface ICollaboratorRepository : IRepositoryBase<Collaborator>
     {
+       
     }
 }

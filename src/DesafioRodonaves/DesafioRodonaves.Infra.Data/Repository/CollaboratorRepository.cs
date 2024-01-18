@@ -11,6 +11,6 @@ namespace DesafioRodonaves.Infra.Data.Repository
         public CollaboratorRepository(ApplicationDbContext dbContext) : base(dbContext) 
         {
             _dbContext = dbContext;
-        }
+        }   
     }
 }

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DesafioRodonaves.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240118144849_InitialCreateDataBase")]
+    [Migration("20240118212606_InitialCreateDataBase")]
     partial class InitialCreateDataBase
     {
         /// <inheritdoc />
@@ -40,7 +40,8 @@ namespace DesafioRodonaves.Infra.Data.Migrations
                         .HasColumnType("character varying(100)")
                         .HasColumnName("nome");
 
-                    b.Property<int>("UnitId")
+                    b.Property<int?>("UnitId")
+                        .IsRequired()
                         .HasColumnType("integer")
                         .HasColumnName("id_unidade");
 
@@ -136,31 +137,31 @@ namespace DesafioRodonaves.Infra.Data.Migrations
 
             modelBuilder.Entity("DesafioRodonaves.Domain.Entities.Collaborator", b =>
                 {
-                    b.HasOne("DesafioRodonaves.Domain.Entities.Unit", "UnitNavigation")
-                        .WithMany("CollaboratorNavigation")
+                    b.HasOne("DesafioRodonaves.Domain.Entities.Unit", "Unit")
+                        .WithMany("Collaborator")
                         .HasForeignKey("UnitId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("DesafioRodonaves.Domain.Entities.User", "UserNavigation")
-                        .WithOne("CollaboratorNavigation")
+                    b.HasOne("DesafioRodonaves.Domain.Entities.User", "User")
+                        .WithOne("Collaborator")
                         .HasForeignKey("DesafioRodonaves.Domain.Entities.Collaborator", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("UnitNavigation");
+                    b.Navigation("Unit");
 
-                    b.Navigation("UserNavigation");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DesafioRodonaves.Domain.Entities.Unit", b =>
                 {
-                    b.Navigation("CollaboratorNavigation");
+                    b.Navigation("Collaborator");
                 });
 
             modelBuilder.Entity("DesafioRodonaves.Domain.Entities.User", b =>
                 {
-                    b.Navigation("CollaboratorNavigation")
+                    b.Navigation("Collaborator")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

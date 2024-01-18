@@ -11,6 +11,5 @@ namespace DesafioRodonaves.Application.Interfaces
 
         Task<string> Update(UpdateUserDTORequest entity, int id);
 
-        Task<string> Delete(int id);
     }
 }

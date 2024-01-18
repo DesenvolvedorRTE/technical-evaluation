@@ -59,7 +59,7 @@ namespace DesafioRodonaves.Infra.Data.Migrations
                         column: x => x.id_unidade,
                         principalTable: "unidades",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_colaboradores_usuarios_id_usuario",
                         column: x => x.id_usuario,

@@ -1,6 +1,7 @@
 ﻿using DesafioRodonaves.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 namespace DesafioRodonaves.Infra.Data.EntityConfiguration
 {
@@ -21,17 +22,17 @@ namespace DesafioRodonaves.Infra.Data.EntityConfiguration
             builder.Property(x => x.UserId).IsRequired().HasColumnName("id_usuario");
 
             // Configuração da relação 1 para muitos entre Unit e Collaborator
-            builder.HasOne(u => u.UnitNavigation)
-                .WithMany(c => c.CollaboratorNavigation)
-                .HasForeignKey(u => u.UnitId)
-                .IsRequired();
+            builder.HasOne(c => c.Unit)
+                .WithMany(u => u.Collaborator)
+                .HasForeignKey(c => c.UnitId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            // Configuração da relação 1 para 1 entre User e Collaborator
-            builder.HasOne(u => u.UserNavigation)
-                .WithOne(c => c.CollaboratorNavigation)
-                .HasForeignKey<Collaborator>(u => u.UserId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(c => c.User)
+                 .WithOne(u => u.Collaborator)
+                 .HasForeignKey<Collaborator>(c => c.UserId)
+                 .IsRequired()
+                 .OnDelete(DeleteBehavior.Cascade);
 
         }
     }

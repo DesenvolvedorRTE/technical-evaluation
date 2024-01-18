@@ -28,19 +28,6 @@ namespace DesafioRodonaves.Application.Services
             _passwordManger = passwordManger;
         }
 
-        public async Task<string> Delete(int id)
-        {
-            var userId = await _userRepository.GetById(id);
-
-            if (userId is null)
-                throw new NotFoundException($"Usuário com id ({id}), não foi encontrando");
-
-             _userRepository.Delete(userId);
-            await _uow.Commit();
-
-            return $"Usuário com id ({id}), foi removido com sucesso";
-        }
-
         public async Task<IEnumerable<GetAllUserDTOResponse>> GetAll()
         {
            var userResponse = await _userRepository.GetAll();

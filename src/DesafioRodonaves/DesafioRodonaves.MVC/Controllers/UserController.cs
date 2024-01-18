@@ -38,10 +38,5 @@ namespace DesafioRodonaves.MVC.Controllers
             return await _userService.Update(user, id);
         }
 
-        [HttpDelete("DeleteUser/{id:int}")]
-        public async Task<string> DeleteUser(int id)
-        {
-            return await _userService.Delete(id);
-        }
     }
 }
