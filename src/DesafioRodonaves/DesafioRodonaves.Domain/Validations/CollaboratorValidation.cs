@@ -1,4 +1,5 @@
-﻿using DesafioRodonaves.Domain.Entities;
+﻿using DesafioRodonaves.Domain.Commons;
+using DesafioRodonaves.Domain.Entities;
 using FluentValidation;
 
 namespace DesafioRodonaves.Domain.Validations
@@ -8,6 +9,7 @@ namespace DesafioRodonaves.Domain.Validations
         public CollaboratorValidation() 
         {
             RuleFor(x => x.Name)
+               .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo nome não pode conter espaço em branco.")
                .NotEmpty()
                .NotNull()
                .MaximumLength(100);
