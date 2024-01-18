@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/src/DesafioRodonaves/DesafioRodonaves.Infra.Data/Migrations/20240117193022_InitialCreateDatabase.cs
+/src/DesafioRodonaves/DesafioRodonaves.Infra.Data/Migrations/20240117193022_InitialCreateDatabase.Designer.cs
+/src/DesafioRodonaves/DesafioRodonaves.Infra.Data/Migrations/20240117213607_AddColumnStatusInTableUnit.cs
+/src/DesafioRodonaves/DesafioRodonaves.Infra.Data/Migrations/20240118111337_AddIndexInColumNameInTableUser.Designer.cs
+/src/DesafioRodonaves/DesafioRodonaves.Infra.Data/Migrations/20240117213607_AddColumnStatusInTableUnit.Designer.cs
+/src/DesafioRodonaves/DesafioRodonaves.Infra.Data/Migrations/20240118111337_AddIndexInColumNameInTableUser.cs
