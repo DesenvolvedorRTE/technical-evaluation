@@ -15,15 +15,14 @@ namespace DesafioRodonaves.Application.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        private readonly IUserService _userService;
         private readonly IUnitOfWork<ApplicationDbContext> _uow;
         private readonly UserValidation _userValidator;
         private readonly IPasswordManager _passwordManger;
 
-        public UserService(IUserRepository userRepository, IUserService userService, IUnitOfWork<ApplicationDbContext> uow, UserValidation userValidator, IPasswordManager passwordManger)
+        public UserService(IUserRepository userRepository, IUnitOfWork<ApplicationDbContext> uow, 
+            UserValidation userValidator, IPasswordManager passwordManger)
         {
             _userRepository = userRepository;
-            _userService = userService;
             _uow = uow;
             _userValidator = userValidator;
             _passwordManger = passwordManger;
@@ -36,7 +35,7 @@ namespace DesafioRodonaves.Application.Services
             var userLogin = await _userRepository.PropertyLoginExist(entity.Login);
 
             if (userLogin != null)
-                throw new CustomException("Já este um nome de usuário com estes dados");
+                throw new CustomException("Já existe um nome de usuário com estes dados");
 
             var userValidation =  await _userValidator.ValidateAsync(user);
 
@@ -48,7 +47,7 @@ namespace DesafioRodonaves.Application.Services
             await _userRepository.Create(user);
 
             await _uow.Commit();
-            return $"Usuário com id ({user.Id}, foi criado com sucesso)";
+            return $"Usuário com id ({user.Id}), foi criado com sucesso";
         }
 
         public async Task<string> Delete(int id)
@@ -56,12 +55,12 @@ namespace DesafioRodonaves.Application.Services
             var userId = await _userRepository.GetById(id);
 
             if (userId is null)
-                throw new NotFoundException($"Usuário com id ({id}, não foi encontrando)");
+                throw new NotFoundException($"Usuário com id ({id}), não foi encontrando");
 
              _userRepository.Delete(userId);
             await _uow.Commit();
 
-            return $"Usuário com id ({id}, foi removido com sucesso)";
+            return $"Usuário com id ({id}), foi removido com sucesso";
         }
 
         public async Task<IEnumerable<GetAllUserDTOResponse>> GetAll()
@@ -76,7 +75,7 @@ namespace DesafioRodonaves.Application.Services
             var userId = await _userRepository.GetById(id);
 
             if (userId is null)
-                throw new NotFoundException($"Usuário com id ({id}, não foi encontrando)");
+                throw new NotFoundException($"Usuário com id ({id}), não foi encontrando");
 
             return userId.Adapt<GetUserByIdDTOResponse>();
         }
@@ -87,7 +86,7 @@ namespace DesafioRodonaves.Application.Services
 
             // Verifica se o usuário existe
             if (userId is null)
-                throw new NotFoundException($"Usuário com id ({id}, não foi encontrando)");
+                throw new NotFoundException($"Usuário com id ({id}), não foi encontrando");
 
             if (!string.IsNullOrEmpty(entity.Password))
                 userId.Password = entity.Password;
@@ -100,7 +99,7 @@ namespace DesafioRodonaves.Application.Services
             _userRepository.Update(userId);
             await _uow.Commit();
 
-            return $"Usuário com id ({id}, foi atualizado com sucesso)";
+            return $"Usuário com id ({id}), foi atualizado com sucesso";
         }
     }
 }

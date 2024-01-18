@@ -10,6 +10,7 @@ namespace DesafioRodonaves.Infra.Ioc.Services
         internal static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<IUnitService, UnitService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPasswordManager, PasswordManager>();
 
             return services;
