@@ -27,7 +27,10 @@ namespace DesafioRodonaves.Infra.Data.EntityConfiguration
                 .WithOne(c => c.UserNavigation)
                 .HasForeignKey<Collaborator>(u => u.Id)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade); ;
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasIndex(x => x.Login).IsUnique();
+
 
 
         }

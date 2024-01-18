@@ -8,7 +8,6 @@ namespace DesafioRodonaves.Application.Commads.Request.User
         public string Login { get; set; }
         public string Password { get; set; }
 
-        [JsonIgnore]
-        public bool Status { get; set; } = true;
+        public bool Status { get; set; }
     }
 }
