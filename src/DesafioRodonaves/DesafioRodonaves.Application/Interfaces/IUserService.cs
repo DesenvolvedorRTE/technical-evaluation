@@ -9,8 +9,6 @@ namespace DesafioRodonaves.Application.Interfaces
 
         Task<GetUserByIdDTOResponse> GetById(int id);
 
-        Task<string> Create(CreateUserDTORequest entity);
-
         Task<string> Update(UpdateUserDTORequest entity, int id);
 
         Task<string> Delete(int id);

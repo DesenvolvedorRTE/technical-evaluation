@@ -69,7 +69,7 @@ namespace DesafioRodonaves.Application.Services
             if (!string.IsNullOrEmpty(entity.Password))
             {
                 userId.Password = entity.Password;
-                userId.Password = _passwordManger.HashPassword(entity.Password);
+                userId.Password = _passwordManger.HashPassword(userId.Password);
             }
             
 

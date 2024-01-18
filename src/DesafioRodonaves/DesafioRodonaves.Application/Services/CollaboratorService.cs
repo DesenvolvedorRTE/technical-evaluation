@@ -39,64 +39,69 @@ namespace DesafioRodonaves.Application.Services
         public async Task<string> Create(CreateCollaboratorDTORequest entity)
         {
 
-            // Validação da unidade
-            var unitId = await _unitRepository.GetById(entity.UnitId);
+                // Validação da unidade
+                var unitId = await _unitRepository.GetById(entity.UnitId);
 
-            if (unitId == null)
-                throw new NotFoundException($"A unidade com id ({entity.UnitId}) não existe, realize o cadastro da unidade em seu módulo");
+                if (unitId == null)
+                    throw new NotFoundException($"A unidade com id ({entity.UnitId}) não existe, realize o cadastro da unidade em seu módulo");
 
-            // Criação do usuário
-            User user = new()
-            {
-                Login = entity.User.Login,
-                Password = entity.User.Password,
-                Status = entity.User.Status
-            };
+                if (unitId.Status == false)
+                    throw new BadRequestException("A unidade informada está inativa. Por favor, selecione outra unidade ativa.");
 
-            // Validação do colaborador
-            Collaborator collaborator = new()
-            {
-                Id = 0,
-                Name = entity.Name,
-                UnitId = entity.UnitId,
-                UserId = 0
-            };
 
-            var collaboratorValidation = await _collaboratorValidation.ValidateAsync(collaborator);
+                // Criação do usuário
+                User user = new()
+                {
+                    Login = entity.User.Login,
+                    Password = entity.User.Password,
+                    Status = entity.User.Status
+                };
 
-            if (!collaboratorValidation.IsValid)
-                throw new ValidationException(collaboratorValidation.Errors);
+                // Validação do colaborador
+                Collaborator collaborator = new()
+                {
+                    Id = 0,
+                    Name = entity.Name,
+                    UnitId = entity.UnitId,
+                    UserId = 0
+                };
 
-            var userLogin = await _userRepository.PropertyLoginExist(entity.User.Login);
+                var collaboratorValidation = await _collaboratorValidation.ValidateAsync(collaborator);
 
-            if(userLogin != null)
+                if (!collaboratorValidation.IsValid)
+                    throw new ValidationException(collaboratorValidation.Errors);
+
+                var userLogin = await _userRepository.PropertyLoginExist(entity.User.Login);
+
+                if (userLogin != null)
                     throw new BadRequestException("Já existe um usuário com este login, tente novamente");
 
-            // Validação do usuário
-            var userValidation = await _userValidation.ValidateAsync(user);
+                // Validação do usuário
+                var userValidation = await _userValidation.ValidateAsync(user);
 
-            if (!userValidation.IsValid)
-                throw new ValidationException(userValidation.Errors);
+                if (!userValidation.IsValid)
+                    throw new ValidationException(userValidation.Errors);
 
-            //user.Password = 
+                user.Password = _passwordManager.HashPassword(user.Password);
 
-            // Criação do usuário no repositório
-            await _userRepository.Create(user);
+                // Criação do usuário no repositório
+                await _userRepository.Create(user);
 
-            // Commit da transação (se estiver usando Unit of Work)
-            await _uow.Commit();
+                // Commit da transação (se estiver usando Unit of Work)
+                await _uow.Commit();
 
-            // Associação do usuário ao colaborador
-            collaborator.UserId = user.Id;
+                // Associação do usuário ao colaborador
+                collaborator.UserId = user.Id;
 
-            // Criação do colaborador no repositório
-            await _collaboratorRepository.Create(collaborator);
+                // Criação do colaborador no repositório
+                await _collaboratorRepository.Create(collaborator);
 
-            // Commit da transação novamente (se estiver usando Unit of Work)
-            await _uow.Commit();
+                // Commit da transação novamente (se estiver usando Unit of Work)
+                await _uow.Commit();
 
-
-            return $"Colaborador com id ({collaborator.Id}) e Usuário com id ({user.Id}), foi criado com sucesso";
+                return $"Colaborador com id ({collaborator.Id}) e Usuário com id ({user.Id}), foi criado com sucesso";
+            
+           
         }
 
         public Task<string> Delete(int id)

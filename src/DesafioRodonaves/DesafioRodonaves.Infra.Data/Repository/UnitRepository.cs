@@ -20,6 +20,7 @@ namespace DesafioRodonaves.Infra.Data.Repository
             return await _context.Units.AsNoTracking().FirstOrDefaultAsync(u => u.UnitCode == unitCode);
         }
 
+
         public async Task<Unit> PropertyUnitNameExists(string unitName)
         {
             return await _context.Units.AsNoTracking().FirstOrDefaultAsync(u => u.UnitName == unitName);
