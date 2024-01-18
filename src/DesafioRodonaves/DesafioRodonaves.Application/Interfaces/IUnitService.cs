@@ -14,5 +14,7 @@ namespace DesafioRodonaves.Application.Interfaces
         Task<string> Update(UpdateUnitDtoRequest entity, int id);
 
         Task<string> Delete(int id);
+
+        Task<IEnumerable<GetAllUnitAndAllCollaboratorDTOResponse>> GetAllUnitAndAllCollaboratorAssociate();
     }
 }

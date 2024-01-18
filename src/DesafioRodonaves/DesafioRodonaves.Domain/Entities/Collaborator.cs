@@ -1,6 +1,5 @@
 ﻿using DesafioRodonaves.Domain.Commons;
 
-
 namespace DesafioRodonaves.Domain.Entities
 {
     public class Collaborator : EntityBase

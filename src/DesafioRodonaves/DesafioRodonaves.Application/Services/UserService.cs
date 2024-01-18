@@ -7,7 +7,6 @@ using DesafioRodonaves.Domain.Entities;
 using DesafioRodonaves.Domain.Interfaces;
 using DesafioRodonaves.Domain.Validations;
 using DesafioRodonaves.Infra.Data.Context;
-using FluentValidation;
 using Mapster;
 
 namespace DesafioRodonaves.Application.Services
@@ -68,5 +67,14 @@ namespace DesafioRodonaves.Application.Services
 
             return $"Usuário com id ({id}), foi atualizado com sucesso";
         }
+
+        public async Task<IEnumerable<GetAllUserByStatusDTOResponse>> GetAllUserByStatus(bool status)
+        {
+            var userStatus = await _userRepository.GetAllUserByStatus(status);
+
+            return userStatus.Adapt<IEnumerable<GetAllUserByStatusDTOResponse>>();
+        }
+
+      
     }
 }

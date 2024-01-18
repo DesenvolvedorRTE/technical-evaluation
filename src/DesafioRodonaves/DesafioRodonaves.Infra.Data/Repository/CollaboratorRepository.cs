@@ -1,6 +1,7 @@
 ﻿using DesafioRodonaves.Domain.Entities;
 using DesafioRodonaves.Domain.Interfaces;
 using DesafioRodonaves.Infra.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace DesafioRodonaves.Infra.Data.Repository
 {
@@ -11,6 +12,11 @@ namespace DesafioRodonaves.Infra.Data.Repository
         public CollaboratorRepository(ApplicationDbContext dbContext) : base(dbContext) 
         {
             _dbContext = dbContext;
-        }   
+        }
+
+        public async Task<Collaborator> GetUserByUnitId(int unitId)
+        {
+            return await _dbContext.Collaborators.AsNoTracking().FirstOrDefaultAsync(x => x.UnitId == unitId);
+        }
     }
 }

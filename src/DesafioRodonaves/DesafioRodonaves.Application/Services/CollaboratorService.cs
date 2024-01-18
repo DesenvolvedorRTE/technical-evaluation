@@ -9,7 +9,6 @@ using DesafioRodonaves.Domain.Validations;
 using DesafioRodonaves.Infra.Data.Context;
 using FluentValidation;
 using Mapster;
-using Microsoft.EntityFrameworkCore;
 
 namespace DesafioRodonaves.Application.Services
 {
@@ -166,6 +165,7 @@ namespace DesafioRodonaves.Application.Services
                 throw new ValidationException(collaboratorValidation.Errors);
 
             _collaboratorRepository.Update(collaboratorId);
+            _uow.Commit();
 
             return $"Colaborador com id ({id}), foi atualizado com sucesso";
         }

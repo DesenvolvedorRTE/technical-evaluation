@@ -17,12 +17,14 @@ namespace DesafioRodonaves.Application.Services
         private readonly IUnitRepository _unitRepository;
         private readonly IUnitOfWork<ApplicationDbContext> _uow;
         private readonly UnitValidation _validations;
+        private readonly ICollaboratorRepository _collaboratorRepository;
 
-        public UnitService(IUnitRepository unitRepository, IUnitOfWork<ApplicationDbContext> uow, UnitValidation validations)
+        public UnitService(IUnitRepository unitRepository, IUnitOfWork<ApplicationDbContext> uow, UnitValidation validations, ICollaboratorRepository collaboratorRepository)
         {
             _unitRepository = unitRepository;
             _uow = uow;
             _validations = validations;
+            _collaboratorRepository = collaboratorRepository;
         }
 
         public async Task<string> Create(CreateUnitDTORequest entity)
@@ -52,6 +54,12 @@ namespace DesafioRodonaves.Application.Services
             if (unitId is null)
                 throw new NotFoundException($"Unidade com id ({id}), não encontrada");
 
+            var collaborator = await _collaboratorRepository.GetUserByUnitId(id);
+
+            if (collaborator != null)
+                throw new ForbiddenException($"Não será possivel excluir uma unidade, pois está esta vinculado a colaborado de id: {collaborator.Id}, " +
+                    $"Exclua o colaborador com o id informando e tente novamente.");
+
             _unitRepository.Delete(unitId);
             await _uow.Commit();
 
@@ -64,6 +72,13 @@ namespace DesafioRodonaves.Application.Services
            var unitResponse =  await _unitRepository.GetAll();
 
             return unitResponse.Adapt<IEnumerable<GetAllUnitDTOResponse>>();
+        }
+
+        public async Task<IEnumerable<GetAllUnitAndAllCollaboratorDTOResponse>> GetAllUnitAndAllCollaboratorAssociate()
+        {
+            var unitsAndCollaborator = await _unitRepository.GetAllUnitAndAllCollaboratorAssociate();
+
+            return unitsAndCollaborator.Adapt<IEnumerable<GetAllUnitAndAllCollaboratorDTOResponse>>();
         }
 
         public async Task<GetUnitByIdDTOResponse> GetById(int id)

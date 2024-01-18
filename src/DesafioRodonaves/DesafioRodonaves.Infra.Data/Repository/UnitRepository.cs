@@ -15,6 +15,16 @@ namespace DesafioRodonaves.Infra.Data.Repository
             _context = context;
         }
 
+        public async Task<IEnumerable<Unit>> GetAllUnitAndAllCollaboratorAssociate()
+        {
+            // Inclui os colaboradores relacionados com cada unidade
+            return await _context.Units
+                .Include(unit => unit.Collaborator)
+                .Where(x => x.Collaborator.Any())
+                .ToListAsync();
+           
+        }
+
         public async Task<Unit> PropertyUnitCodeExists(string unitCode)
         {
             return await _context.Units.AsNoTracking().FirstOrDefaultAsync(u => u.UnitCode == unitCode);
@@ -25,5 +35,7 @@ namespace DesafioRodonaves.Infra.Data.Repository
         {
             return await _context.Units.AsNoTracking().FirstOrDefaultAsync(u => u.UnitName == unitName);
         }
+
+
     }
 }

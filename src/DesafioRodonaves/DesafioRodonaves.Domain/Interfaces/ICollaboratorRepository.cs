@@ -5,6 +5,6 @@ namespace DesafioRodonaves.Domain.Interfaces
 {
     public interface ICollaboratorRepository : IRepositoryBase<Collaborator>
     {
-       
+        Task<Collaborator> GetUserByUnitId(int unitId);
     }
 }

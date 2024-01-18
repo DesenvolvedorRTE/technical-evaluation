@@ -8,5 +8,7 @@ namespace DesafioRodonaves.Domain.Interfaces
         Task<Unit> PropertyUnitNameExists(string unitName);
         Task<Unit> PropertyUnitCodeExists(string unitCode);
 
+        Task<IEnumerable<Unit>> GetAllUnitAndAllCollaboratorAssociate();
+
     }
 }

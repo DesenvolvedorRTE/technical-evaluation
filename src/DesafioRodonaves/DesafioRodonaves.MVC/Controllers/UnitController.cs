@@ -29,6 +29,12 @@ namespace DesafioRodonaves.MVC.Controllers
             return await _unitService.GetAll();
         }
 
+        [HttpGet("GetAllUnitAndAllCollaboratorAssociate")]
+        public async Task<IEnumerable<GetAllUnitAndAllCollaboratorDTOResponse>> GetAllUnitAndAllCollaboratorAssociate()
+        {
+            return await _unitService.GetAllUnitAndAllCollaboratorAssociate();
+        }
+
         [HttpPost("CreateUnit")]
         public async Task<string> CreateUnit([FromBody] CreateUnitDTORequest unit)
         {

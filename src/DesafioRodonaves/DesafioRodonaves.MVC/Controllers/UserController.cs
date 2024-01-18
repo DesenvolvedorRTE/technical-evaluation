@@ -36,6 +36,12 @@ namespace DesafioRodonaves.MVC.Controllers
         public async Task<string> UpdateUser([FromBody] UpdateUserDTORequest user, int id)
         {
             return await _userService.Update(user, id);
+        } 
+
+        [HttpPut("GetAllUserByStatus/{status:bool}")]
+        public async Task<IEnumerable<GetAllUserByStatusDTOResponse>> GetAllUserByStatus(bool status)
+        {
+            return await _userService.GetAllUserByStatus(status);
         }
 
     }
