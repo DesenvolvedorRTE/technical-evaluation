@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DesafioRodonaves.MVC.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class UserController : ControllerBase
     {

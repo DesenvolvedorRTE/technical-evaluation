@@ -11,6 +11,7 @@ namespace DesafioRodonaves.Infra.Ioc.Services
         {
             services.AddScoped<IUnitService, UnitService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICollaboratorService, CollaboratorService>();
             services.AddScoped<IPasswordManager, PasswordManager>();
 
             return services;

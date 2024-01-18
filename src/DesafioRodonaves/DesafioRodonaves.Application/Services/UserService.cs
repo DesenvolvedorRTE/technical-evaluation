@@ -28,28 +28,6 @@ namespace DesafioRodonaves.Application.Services
             _passwordManger = passwordManger;
         }
 
-        public async Task<string> Create(CreateUserDTORequest entity)
-        {
-            var user = entity.Adapt<User>();
-
-            var userLogin = await _userRepository.PropertyLoginExist(entity.Login);
-
-            if (userLogin != null)
-                throw new CustomException("Já existe um nome de usuário com estes dados");
-
-            var userValidation =  await _userValidator.ValidateAsync(user);
-
-            if (!userValidation.IsValid)
-                throw new ValidationException(userValidation.Errors);
-
-            user.Password = _passwordManger.HashPassword(entity.Password);
-
-            await _userRepository.Create(user);
-
-            await _uow.Commit();
-            return $"Usuário com id ({user.Id}), foi criado com sucesso";
-        }
-
         public async Task<string> Delete(int id)
         {
             var userId = await _userRepository.GetById(id);
@@ -89,12 +67,14 @@ namespace DesafioRodonaves.Application.Services
                 throw new NotFoundException($"Usuário com id ({id}), não foi encontrando");
 
             if (!string.IsNullOrEmpty(entity.Password))
+            {
                 userId.Password = entity.Password;
+                userId.Password = _passwordManger.HashPassword(entity.Password);
+            }
+            
 
             if (!string.IsNullOrEmpty(entity.Status.ToString()))
                 userId.Status = entity.Status;
-
-            userId.Password = _passwordManger.HashPassword(entity.Password);
 
             _userRepository.Update(userId);
             await _uow.Commit();

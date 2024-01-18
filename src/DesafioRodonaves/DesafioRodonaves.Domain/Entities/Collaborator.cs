@@ -13,7 +13,7 @@ namespace DesafioRodonaves.Domain.Entities
 
         // Relacionamento com o usuário
         public User UserNavigation { get; set; } 
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
 
     }

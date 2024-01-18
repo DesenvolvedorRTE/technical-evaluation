@@ -11,8 +11,7 @@ namespace DesafioRodonaves.Domain.Entities
         public bool? Status { get; set; }
 
         // Propriedade de navageção
-        public Collaborator CollaboratorNavigation { get; set; }
-
+        public IEnumerable<Collaborator> CollaboratorNavigation { get; set; } = new List<Collaborator>();
        
     }
 }

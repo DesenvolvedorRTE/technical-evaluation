@@ -13,7 +13,7 @@ namespace DesafioRodonaves.Infra.Data.EntityConfiguration
             builder.ToTable("usuarios");
 
             // Configura a geração de id pelo banco de dados
-            builder.Property(x => x.Id).ValueGeneratedOnAdd().HasColumnName("id");
+            builder.Property(x => x.Id).UseIdentityColumn().HasColumnName("id");
 
 
             builder.Property(x => x.Login).IsRequired().HasMaxLength(100).HasColumnName("nome_do_usuario");
@@ -25,13 +25,9 @@ namespace DesafioRodonaves.Infra.Data.EntityConfiguration
             // Configuração da relação 1 para 1 entre user e Collaborator
             builder.HasOne(u => u.CollaboratorNavigation)
                 .WithOne(c => c.UserNavigation)
-                .HasForeignKey<Collaborator>(u => u.Id)
-                .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasIndex(x => x.Login).IsUnique();
-
-
 
         }
 
