@@ -1,5 +1,4 @@
-﻿
-using DesafioRodonaves.Domain.Entities;
+﻿using DesafioRodonaves.Domain.Entities;
 using DesafioRodonaves.Domain.Interfaces;
 using DesafioRodonaves.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;

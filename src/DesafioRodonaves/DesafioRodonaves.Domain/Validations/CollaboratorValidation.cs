@@ -6,7 +6,7 @@ namespace DesafioRodonaves.Domain.Validations
 {
     public class CollaboratorValidation : AbstractValidator<Collaborator>
     {
-        public CollaboratorValidation() 
+        public CollaboratorValidation()
         {
             RuleFor(x => x.Name)
                .Must(value => !UtilsValidations.ContainsWhitespace(value)).WithMessage("O campo nome não pode conter espaço em branco.")

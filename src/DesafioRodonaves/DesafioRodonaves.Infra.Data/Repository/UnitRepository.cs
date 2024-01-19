@@ -1,5 +1,4 @@
-﻿
-using DesafioRodonaves.Domain.Entities;
+﻿using DesafioRodonaves.Domain.Entities;
 using DesafioRodonaves.Domain.Interfaces;
 using DesafioRodonaves.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +21,6 @@ namespace DesafioRodonaves.Infra.Data.Repository
                 .Include(unit => unit.Collaborator)
                 .Where(x => x.Collaborator.Any())
                 .ToListAsync();
-           
         }
 
         public async Task<Unit> PropertyUnitCodeExists(string unitCode)
@@ -30,12 +28,9 @@ namespace DesafioRodonaves.Infra.Data.Repository
             return await _context.Units.AsNoTracking().FirstOrDefaultAsync(u => u.UnitCode == unitCode);
         }
 
-
         public async Task<Unit> PropertyUnitNameExists(string unitName)
         {
             return await _context.Units.AsNoTracking().FirstOrDefaultAsync(u => u.UnitName == unitName);
         }
-
-
     }
 }

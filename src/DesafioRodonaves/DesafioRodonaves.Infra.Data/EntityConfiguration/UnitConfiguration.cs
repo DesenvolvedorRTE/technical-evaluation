@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-
 namespace DesafioRodonaves.Infra.Data.EntityConfiguration
 {
     public class UnitConfiguration : IEntityTypeConfiguration<Unit>
@@ -28,11 +27,6 @@ namespace DesafioRodonaves.Infra.Data.EntityConfiguration
             // Configuração de index
             builder.HasIndex(x => x.UnitCode).IsUnique();
             builder.HasIndex(x => x.UnitName).IsUnique();
-
-
-
-
-
         }
     }
 }

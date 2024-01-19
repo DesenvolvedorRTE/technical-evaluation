@@ -6,12 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DesafioRodonaves.MVC.Controllers
 {
-   
     [Route("api/")]
     [ApiController]
     public class UnitController : ControllerBase
     {
-
         private readonly IUnitService _unitService;
 
         public UnitController(IUnitService unitService)

@@ -1,5 +1,4 @@
 ﻿using DesafioRodonaves.Application.Commads.Request.Collaborator;
-using DesafioRodonaves.Application.Commads.Request.User;
 using DesafioRodonaves.Application.Commads.Response.Collaborator;
 
 namespace DesafioRodonaves.Application.Interfaces

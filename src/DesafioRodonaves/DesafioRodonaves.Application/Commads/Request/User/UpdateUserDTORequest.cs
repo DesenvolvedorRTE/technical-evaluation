@@ -1,5 +1,4 @@
-﻿
-namespace DesafioRodonaves.Application.Commads.Request.User
+﻿namespace DesafioRodonaves.Application.Commads.Request.User
 {
     public class UpdateUserDTORequest
     {

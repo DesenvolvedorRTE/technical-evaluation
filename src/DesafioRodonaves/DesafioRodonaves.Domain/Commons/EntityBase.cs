@@ -1,8 +1,7 @@
-﻿
-namespace DesafioRodonaves.Domain.Commons
+﻿namespace DesafioRodonaves.Domain.Commons
 {
     public abstract class EntityBase
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
     }
 }

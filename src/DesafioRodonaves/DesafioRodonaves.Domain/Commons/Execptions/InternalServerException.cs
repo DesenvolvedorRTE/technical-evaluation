@@ -1,6 +1,7 @@
 ﻿using System.Net;
 
 namespace DesafioRodonaves.Domain.Commons.Execptions;
+
 public class InternalServerException : CustomException
 {
     public InternalServerException(string message, List<string>? errors = default)

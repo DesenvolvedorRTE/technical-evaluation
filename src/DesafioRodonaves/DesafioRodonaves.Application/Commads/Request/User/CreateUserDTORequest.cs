@@ -1,6 +1,4 @@
-﻿
-using DesafioRodonaves.Domain.Enums;
-using System.Text.Json.Serialization;
+﻿using DesafioRodonaves.Domain.Enums;
 
 namespace DesafioRodonaves.Application.Commads.Request.User
 {

@@ -45,6 +45,5 @@ namespace DesafioRodonaves.MVC.Controllers
         {
             return await _userService.GetAllUserByStatus(status);
         }
-
     }
 }

@@ -1,7 +1,5 @@
-﻿using Docker.DotNet.Models;
-using Docker.DotNet;
-using Microsoft.Extensions.DependencyInjection;
-
+﻿using Docker.DotNet;
+using Docker.DotNet.Models;
 
 namespace DesafioRodonaves.Infra.Ioc.Docker
 {
@@ -42,7 +40,7 @@ namespace DesafioRodonaves.Infra.Ioc.Docker
                     }
 
                     // Aguardar a inicialização completa do PostgreSQL se necessário
-                   //await WaitForPostgresToBeReady(client);
+                    //await WaitForPostgresToBeReady(client);
                 }
             }
             catch (Exception ex)
@@ -51,7 +49,5 @@ namespace DesafioRodonaves.Infra.Ioc.Docker
                 // Adicione lógica adicional para tratamento de exceções se necessário
             }
         }
-
     }
 }
-

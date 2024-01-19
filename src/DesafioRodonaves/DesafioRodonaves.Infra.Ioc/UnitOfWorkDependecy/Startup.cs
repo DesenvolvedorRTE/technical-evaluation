@@ -2,7 +2,6 @@
 using DesafioRodonaves.Infra.Data.UnitOfWork;
 using Microsoft.Extensions.DependencyInjection;
 
-
 namespace DesafioRodonaves.Infra.Ioc.UnitOfWorkDependecy
 {
     internal static class Startup

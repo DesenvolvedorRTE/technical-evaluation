@@ -3,7 +3,7 @@ using DesafioRodonaves.Application.Commads.Response.Unit;
 
 namespace DesafioRodonaves.Application.Interfaces
 {
-    public interface IUnitService 
+    public interface IUnitService
     {
         Task<IEnumerable<GetAllUnitDTOResponse>> GetAll();
 

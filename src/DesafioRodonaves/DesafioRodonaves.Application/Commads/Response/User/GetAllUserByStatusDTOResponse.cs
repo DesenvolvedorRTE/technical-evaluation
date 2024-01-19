@@ -1,6 +1,5 @@
 ﻿using DesafioRodonaves.Domain.Commons;
 
-
 namespace DesafioRodonaves.Application.Commads.Response.User
 {
     public class GetAllUserByStatusDTOResponse : EntityBase

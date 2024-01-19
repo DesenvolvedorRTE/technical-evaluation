@@ -9,7 +9,6 @@ using DesafioRodonaves.Infra.Data.Context;
 using FluentValidation;
 using Mapster;
 
-
 namespace DesafioRodonaves.Application.Services
 {
     public class UnitService : IUnitService
@@ -31,10 +30,10 @@ namespace DesafioRodonaves.Application.Services
         {
             var unit = entity.Adapt<Unit>();
             var unitValidation = await _validations.ValidateAsync(unit);
-            var propertyUnitName = await _unitRepository.PropertyUnitNameExists(unit.UnitName); 
+            var propertyUnitName = await _unitRepository.PropertyUnitNameExists(unit.UnitName);
             var propertyUnitCode = await _unitRepository.PropertyUnitNameExists(unit.UnitCode);
 
-            if (!unitValidation.IsValid) 
+            if (!unitValidation.IsValid)
                 throw new ValidationException(unitValidation.Errors);
 
             if (propertyUnitName != null || propertyUnitCode != null)
@@ -64,12 +63,11 @@ namespace DesafioRodonaves.Application.Services
             await _uow.Commit();
 
             return $"Unidade com id ({id}), foi excluida com sucesso!";
-            
         }
 
         public async Task<IEnumerable<GetAllUnitDTOResponse>> GetAll()
         {
-           var unitResponse =  await _unitRepository.GetAll();
+            var unitResponse = await _unitRepository.GetAll();
 
             return unitResponse.Adapt<IEnumerable<GetAllUnitDTOResponse>>();
         }
@@ -95,14 +93,14 @@ namespace DesafioRodonaves.Application.Services
         public async Task<string> Update(UpdateUnitDtoRequest entity, int id)
         {
             var unitId = await _unitRepository.GetById(id);
-      
+
             var propertyUnitName = await _unitRepository.PropertyUnitNameExists(entity.UnitName);
             var propertyUnitCode = await _unitRepository.PropertyUnitNameExists(entity.UnitCode);
 
             if (unitId is null)
                 throw new NotFoundException($"Unidade com id ({id}) não foi encontrada");
 
-            if(!string.IsNullOrEmpty(entity.UnitName))
+            if (!string.IsNullOrEmpty(entity.UnitName))
                 unitId.UnitName = entity.UnitName;
 
             if (!string.IsNullOrEmpty(entity.UnitCode))
@@ -117,7 +115,6 @@ namespace DesafioRodonaves.Application.Services
             if (propertyUnitName != null || propertyUnitCode != null)
                 throw new BadRequestException("Já existe uma unidade com estás informações de nome de unidade ou código da unidade");
 
-
             var unitValidation = await _validations.ValidateAsync(unitId);
 
             if (!unitValidation.IsValid)
@@ -126,10 +123,7 @@ namespace DesafioRodonaves.Application.Services
             _unitRepository.Update(unitId);
             await _uow.Commit();
 
-
             return $"Usário com id ({unitId.Id}), foi atualizado com sucesso";
-
-
         }
     }
 }

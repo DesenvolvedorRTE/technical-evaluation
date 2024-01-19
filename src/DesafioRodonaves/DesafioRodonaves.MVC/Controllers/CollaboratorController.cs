@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DesafioRodonaves.MVC.Controllers
 {
-    
     [Route("api/")]
     [ApiController]
     public class CollaboratorController : ControllerBase
@@ -17,7 +16,6 @@ namespace DesafioRodonaves.MVC.Controllers
         {
             _collaboratorService = collaboratorService;
         }
-
 
         [Authorize(Roles = "commonCollaborator, collaboratorAdministrator")]
         [HttpGet("GetCollaboratorById/{id:int}")]
@@ -39,7 +37,6 @@ namespace DesafioRodonaves.MVC.Controllers
         {
             return await _collaboratorService.Create(collaborator);
         }
-
 
         [Authorize(Roles = "commonCollaborator, collaboratorAdministrator")]
         [HttpPut("UpdateCollaborator/{id:int}")]

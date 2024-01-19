@@ -1,5 +1,4 @@
-﻿
-using DesafioRodonaves.Domain.Commons;
+﻿using DesafioRodonaves.Domain.Commons;
 
 namespace DesafioRodonaves.Application.Commads.Response.Unit
 {
@@ -8,7 +7,7 @@ namespace DesafioRodonaves.Application.Commads.Response.Unit
         public string UnitName { get; set; }
 
         public string UnitCode { get; set; }
-      
+
         public bool Status { get; set; }
     }
 }

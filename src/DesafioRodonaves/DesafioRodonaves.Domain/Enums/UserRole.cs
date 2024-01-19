@@ -1,10 +1,8 @@
-﻿
-namespace DesafioRodonaves.Domain.Enums
+﻿namespace DesafioRodonaves.Domain.Enums
 {
     public enum UserRole
     {
         commonCollaborator = 1,
-        collaboratorAdministrator =2
-
+        collaboratorAdministrator = 2
     }
 }

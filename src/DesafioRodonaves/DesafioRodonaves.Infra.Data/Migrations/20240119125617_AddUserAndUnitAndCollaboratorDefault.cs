@@ -17,7 +17,6 @@ namespace DesafioRodonaves.Infra.Data.Migrations
                 UnitName = "Unidade Padrão",
                 UnitCode = "Codigo_12345",
                 Status = true
-
             };
             migrationBuilder.InsertData(
                 table: "unidades",
@@ -32,7 +31,6 @@ namespace DesafioRodonaves.Infra.Data.Migrations
                 Password = "Admin12345#@",
                 Status = true,
                 Role = 2
-
             };
 
             migrationBuilder.InsertData(
@@ -60,7 +58,6 @@ namespace DesafioRodonaves.Infra.Data.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
         }
 
         private string HashPassword(string password)

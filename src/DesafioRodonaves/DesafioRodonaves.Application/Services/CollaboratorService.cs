@@ -1,5 +1,4 @@
-﻿
-using DesafioRodonaves.Application.Commads.Request.Collaborator;
+﻿using DesafioRodonaves.Application.Commads.Request.Collaborator;
 using DesafioRodonaves.Application.Commads.Response.Collaborator;
 using DesafioRodonaves.Application.Interfaces;
 using DesafioRodonaves.Domain.Commons.Execptions;
@@ -21,7 +20,6 @@ namespace DesafioRodonaves.Application.Services
         private readonly IUnitRepository _unitRepository;
         private readonly IUnitOfWork<ApplicationDbContext> _uow;
         private readonly IPasswordManager _passwordManager;
-      
 
         public CollaboratorService(CollaboratorValidation collaboratorValidation, UserValidation userValidation, ICollaboratorRepository collaboratorRepository,
             IUserRepository userRepository, IUnitRepository unitRepository, IUnitOfWork<ApplicationDbContext> uow, IPasswordManager passwordManager)
@@ -37,71 +35,67 @@ namespace DesafioRodonaves.Application.Services
 
         public async Task<string> Create(CreateCollaboratorDTORequest entity)
         {
+            // Validação da unidade
+            var unitId = await _unitRepository.GetById(entity.UnitId);
 
-                // Validação da unidade
-                var unitId = await _unitRepository.GetById(entity.UnitId);
+            if (unitId == null)
+                throw new NotFoundException($"A unidade com id ({entity.UnitId}) não existe, realize o cadastro da unidade em seu módulo");
 
-                if (unitId == null)
-                    throw new NotFoundException($"A unidade com id ({entity.UnitId}) não existe, realize o cadastro da unidade em seu módulo");
+            if (unitId.Status == false)
+                throw new BadRequestException("A unidade informada está inativa. Por favor, selecione outra unidade ativa.");
 
-                if (unitId.Status == false)
-                    throw new BadRequestException("A unidade informada está inativa. Por favor, selecione outra unidade ativa.");
+            // Criação do usuário
+            User user = new()
+            {
+                Login = entity.User.Login.ToLower(),
+                Password = entity.User.Password,
+                Status = entity.User.Status,
+                Roles = entity.User.Role
+            };
 
+            // Validação do colaborador
+            Collaborator collaborator = new()
+            {
+                Id = 0,
+                Name = entity.Name,
+                UnitId = entity.UnitId,
+                UserId = 0
+            };
 
-                // Criação do usuário
-                User user = new()
-                {
-                    Login = entity.User.Login.ToLower(),
-                    Password = entity.User.Password,
-                    Status = entity.User.Status,
-                    Roles = entity.User.Role
-                };
+            var collaboratorValidation = await _collaboratorValidation.ValidateAsync(collaborator);
 
-                // Validação do colaborador
-                Collaborator collaborator = new()
-                {
-                    Id = 0,
-                    Name = entity.Name,
-                    UnitId = entity.UnitId,
-                    UserId = 0
-                };
+            if (!collaboratorValidation.IsValid)
+                throw new ValidationException(collaboratorValidation.Errors);
 
-                var collaboratorValidation = await _collaboratorValidation.ValidateAsync(collaborator);
+            var userLogin = await _userRepository.PropertyLoginExist(entity.User.Login);
 
-                if (!collaboratorValidation.IsValid)
-                    throw new ValidationException(collaboratorValidation.Errors);
+            if (userLogin != null)
+                throw new BadRequestException("Já existe um usuário com este login, tente novamente");
 
-                var userLogin = await _userRepository.PropertyLoginExist(entity.User.Login);
+            // Validação do usuário
+            var userValidation = await _userValidation.ValidateAsync(user);
 
-                if (userLogin != null)
-                    throw new BadRequestException("Já existe um usuário com este login, tente novamente");
+            if (!userValidation.IsValid)
+                throw new ValidationException(userValidation.Errors);
 
-                // Validação do usuário
-                var userValidation = await _userValidation.ValidateAsync(user);
+            user.Password = _passwordManager.HashPassword(user.Password);
 
-                if (!userValidation.IsValid)
-                    throw new ValidationException(userValidation.Errors);
+            // Criação do usuário no repositório
+            await _userRepository.Create(user);
 
-                user.Password = _passwordManager.HashPassword(user.Password);
+            // Commit da transação (se estiver usando Unit of Work)
+            await _uow.Commit();
 
-                // Criação do usuário no repositório
-                await _userRepository.Create(user);
+            // Associação do usuário ao colaborador
+            collaborator.UserId = user.Id;
 
-                // Commit da transação (se estiver usando Unit of Work)
-                await _uow.Commit();
+            // Criação do colaborador no repositório
+            await _collaboratorRepository.Create(collaborator);
 
-                // Associação do usuário ao colaborador
-                collaborator.UserId = user.Id;
+            // Commit da transação novamente (se estiver usando Unit of Work)
+            await _uow.Commit();
 
-                // Criação do colaborador no repositório
-                await _collaboratorRepository.Create(collaborator);
-
-                // Commit da transação novamente (se estiver usando Unit of Work)
-                await _uow.Commit();
-
-                return $"Colaborador com id ({collaborator.Id}) e Usuário com id ({user.Id}), foi criado com sucesso";
-            
-           
+            return $"Colaborador com id ({collaborator.Id}) e Usuário com id ({user.Id}), foi criado com sucesso";
         }
 
         public async Task<string> Delete(int id)
@@ -119,7 +113,6 @@ namespace DesafioRodonaves.Application.Services
 
             return $"Colaborador com id ({id}), foi removido com sucesso\n" +
                 $"Obs: O usuário relacionando a ele também foi excluido";
-
         }
 
         public async Task<IEnumerable<GetAllCollaboratorDTOResponse>> GetAll()
@@ -146,7 +139,6 @@ namespace DesafioRodonaves.Application.Services
             if (collaboratorId is null)
                 throw new NotFoundException($"Colaborador com id ({id}), não foi encontrado");
 
-       
             if (!string.IsNullOrEmpty(entity.Name))
                 collaboratorId.Name = entity.Name.ToLower();
 
@@ -158,7 +150,6 @@ namespace DesafioRodonaves.Application.Services
                 if (unitId == null)
                     throw new NotFoundException($"A unidade com id ({entity.UnitId}) não existe, realize o cadastro da unidade em seu módulo");
             }
-
 
             var collaboratorValidation = await _collaboratorValidation.ValidateAsync(collaboratorId);
 

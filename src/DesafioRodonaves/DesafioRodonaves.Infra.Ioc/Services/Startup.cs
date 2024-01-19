@@ -1,5 +1,4 @@
-﻿
-using DesafioRodonaves.Application.Interfaces;
+﻿using DesafioRodonaves.Application.Interfaces;
 using DesafioRodonaves.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 

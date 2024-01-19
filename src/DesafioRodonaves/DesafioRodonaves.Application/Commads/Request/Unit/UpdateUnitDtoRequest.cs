@@ -1,6 +1,4 @@
-﻿
-
-namespace DesafioRodonaves.Application.Commads.Request.Unit
+﻿namespace DesafioRodonaves.Application.Commads.Request.Unit
 {
     public class UpdateUnitDtoRequest
     {

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace DesafioRodonaves.Application.Commads.Request.Unit
 {
@@ -11,6 +10,5 @@ namespace DesafioRodonaves.Application.Commads.Request.Unit
 
         [JsonIgnore]
         public bool Status { get; set; } = true;
-
     }
 }

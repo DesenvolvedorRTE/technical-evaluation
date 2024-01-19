@@ -1,5 +1,4 @@
-﻿
-namespace DesafioRodonaves.Domain.Interfaces
+﻿namespace DesafioRodonaves.Domain.Interfaces
 {
     public interface IRepositoryBase<TEntity>
     {

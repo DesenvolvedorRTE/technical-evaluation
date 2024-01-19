@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 {
-
     builder.Services.AddControllers();
     // Add services to the container.
     builder.Services.AddControllersWithViews();
@@ -21,7 +20,6 @@ var builder = WebApplication.CreateBuilder(args);
     });
 }
 
-
 var app = builder.Build();
 {
     // Configure the HTTP request pipeline.
@@ -29,7 +27,6 @@ var app = builder.Build();
     {
         app.UseSwagger();
         app.UseSwaggerUI();
-        
     }
 
     app.UseHttpsRedirection();
@@ -44,6 +41,4 @@ var app = builder.Build();
     app.MapControllers();
 
     app.Run();
-
 }
-    

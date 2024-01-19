@@ -9,6 +9,5 @@ namespace DesafioRodonaves.Application.Commads.Request.Collaborator
         public int UnitId { get; set; }
 
         public CreateUserDTORequest User { get; set; }
-
     }
 }

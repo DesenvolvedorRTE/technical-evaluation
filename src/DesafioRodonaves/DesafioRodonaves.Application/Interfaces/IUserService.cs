@@ -1,6 +1,5 @@
 ﻿using DesafioRodonaves.Application.Commads.Request.User;
 using DesafioRodonaves.Application.Commads.Response.User;
-using DesafioRodonaves.Domain.Entities;
 
 namespace DesafioRodonaves.Application.Interfaces
 {
@@ -15,7 +14,5 @@ namespace DesafioRodonaves.Application.Interfaces
         Task<IEnumerable<GetAllUserByStatusDTOResponse>> GetAllUserByStatus(bool status);
 
         Task<LoginDTOResponse> Login(LoginDTORequest login);
-        
-
     }
 }

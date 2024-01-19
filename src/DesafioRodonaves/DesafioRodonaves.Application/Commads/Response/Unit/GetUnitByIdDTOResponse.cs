@@ -11,4 +11,3 @@ namespace DesafioRodonaves.Application.Commads.Response.Unit
         public bool Status { get; set; }
     }
 }
-

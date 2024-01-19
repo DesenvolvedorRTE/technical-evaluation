@@ -1,8 +1,6 @@
-﻿
-using DesafioRodonaves.Domain.Entities;
+﻿using DesafioRodonaves.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Reflection.Emit;
 
 namespace DesafioRodonaves.Infra.Data.EntityConfiguration
 {
@@ -16,7 +14,6 @@ namespace DesafioRodonaves.Infra.Data.EntityConfiguration
             // Configura a geração de id pelo banco de dados
             builder.Property(x => x.Id).UseIdentityColumn().HasColumnName("id");
 
-
             builder.Property(x => x.Login).IsRequired().HasMaxLength(100).HasColumnName("nome_do_usuario");
 
             builder.Property(x => x.Password).IsRequired().HasMaxLength(150).HasColumnName("senha");
@@ -25,12 +22,7 @@ namespace DesafioRodonaves.Infra.Data.EntityConfiguration
 
             builder.Property(x => x.Roles).IsRequired().HasColumnName("permissoes");
 
-
             builder.HasIndex(x => x.Login).IsUnique();
-
         }
-
     }
-
 }
-    

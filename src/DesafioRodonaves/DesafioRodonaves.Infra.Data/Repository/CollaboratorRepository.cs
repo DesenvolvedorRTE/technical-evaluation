@@ -9,7 +9,7 @@ namespace DesafioRodonaves.Infra.Data.Repository
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public CollaboratorRepository(ApplicationDbContext dbContext) : base(dbContext) 
+        public CollaboratorRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }

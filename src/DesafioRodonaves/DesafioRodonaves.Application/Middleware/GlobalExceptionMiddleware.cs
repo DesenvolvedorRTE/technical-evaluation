@@ -6,7 +6,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Text.Json;
 
-
 namespace DesafioRodonaves.Application.Middleware
 {
     public class GlobalExceptionMiddleware : IMiddleware
@@ -19,21 +18,16 @@ namespace DesafioRodonaves.Application.Middleware
 
                 if (context.Response.StatusCode is 401)
                     throw new UnauthorizedException("Usuário não autenticado, realize o login no sistema e tente novamente.");
-                
 
                 if (context.Response.StatusCode is 403)
                     throw new ForbiddenException("O usuário não tem permissão para acessar este recurso.");
-
             }
             catch (Exception ex)
             {
-
-
                 ErrorResult errorResult = new()
                 {
                     Source = ex.TargetSite?.DeclaringType?.FullName,
                     Exception = ex.Message.Trim()
-                    
                 };
 
                 if (ex is not CustomException && ex.InnerException != null)
@@ -87,7 +81,6 @@ namespace DesafioRodonaves.Application.Middleware
                 response.ContentType = "application/json";
                 response.StatusCode = errorResult.StatusCode;
                 await response.WriteAsync(JsonSerializer.Serialize(errorResult));
-
             }
         }
     }

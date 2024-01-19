@@ -1,6 +1,4 @@
-﻿
-
-namespace DesafioRodonaves.Application.Commads.Response.User
+﻿namespace DesafioRodonaves.Application.Commads.Response.User
 {
     public class LoginDTOResponse
     {

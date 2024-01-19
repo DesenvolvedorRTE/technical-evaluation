@@ -1,9 +1,7 @@
-﻿
-using DesafioRodonaves.Application.Commads.Request.User;
+﻿using DesafioRodonaves.Application.Commads.Request.User;
 using DesafioRodonaves.Application.Commads.Response.User;
 using DesafioRodonaves.Application.Interfaces;
 using DesafioRodonaves.Domain.Commons.Execptions;
-using DesafioRodonaves.Domain.Entities;
 using DesafioRodonaves.Domain.Interfaces;
 using DesafioRodonaves.Domain.Validations;
 using DesafioRodonaves.Infra.Data.Context;
@@ -30,12 +28,12 @@ namespace DesafioRodonaves.Application.Services
 
         public async Task<IEnumerable<GetAllUserDTOResponse>> GetAll()
         {
-           var userResponse = await _userRepository.GetAll();
+            var userResponse = await _userRepository.GetAll();
 
             return userResponse.Adapt<IEnumerable<GetAllUserDTOResponse>>();
         }
 
-        public async  Task<GetUserByIdDTOResponse> GetById(int id)
+        public async Task<GetUserByIdDTOResponse> GetById(int id)
         {
             var userId = await _userRepository.GetById(id);
 
@@ -58,7 +56,6 @@ namespace DesafioRodonaves.Application.Services
                 userId.Password = entity.Password;
                 userId.Password = _passwordManger.HashPassword(userId.Password);
             }
-            
 
             if (!string.IsNullOrEmpty(entity.Status.ToString()))
                 userId.Status = entity.Status;
@@ -82,7 +79,7 @@ namespace DesafioRodonaves.Application.Services
                 throw new BadRequestException("Dados inválidos");
 
             var userLogin = await _userRepository.CheckDataLogin(request.Login.ToLower());
-            var verifyPassword = _passwordManger.VerifyPassword(userLogin.Password,request.Password);
+            var verifyPassword = _passwordManger.VerifyPassword(userLogin.Password, request.Password);
 
             if (userLogin is null)
                 throw new ForbiddenException("Usuário ou senha inválido.");

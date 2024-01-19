@@ -1,5 +1,4 @@
-﻿
-using DesafioRodonaves.Domain.Interfaces;
+﻿using DesafioRodonaves.Domain.Interfaces;
 using DesafioRodonaves.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,12 +16,12 @@ namespace DesafioRodonaves.Infra.Data.Repository
 
         public async Task Create(TEntity entity)
         {
-             await _context.Set<TEntity>().AddAsync(entity);
+            await _context.Set<TEntity>().AddAsync(entity);
         }
 
         public void Delete(TEntity entity)
         {
-             _context.Set<TEntity>().Remove(entity);
+            _context.Set<TEntity>().Remove(entity);
         }
 
         public async Task<IEnumerable<TEntity>> GetAll()

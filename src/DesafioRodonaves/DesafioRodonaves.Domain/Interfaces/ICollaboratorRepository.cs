@@ -1,5 +1,4 @@
-﻿
-using DesafioRodonaves.Domain.Entities;
+﻿using DesafioRodonaves.Domain.Entities;
 
 namespace DesafioRodonaves.Domain.Interfaces
 {

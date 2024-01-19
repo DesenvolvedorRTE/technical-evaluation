@@ -1,5 +1,4 @@
-﻿
-using DesafioRodonaves.Domain.Entities;
+﻿using DesafioRodonaves.Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -51,6 +50,5 @@ namespace DesafioRodonaves.Application.Services
 
             return claims;
         }
-
     }
 }

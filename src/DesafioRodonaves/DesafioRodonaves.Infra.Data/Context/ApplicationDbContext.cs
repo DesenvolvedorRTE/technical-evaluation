@@ -1,14 +1,11 @@
 ﻿using DesafioRodonaves.Domain.Entities;
 using DesafioRodonaves.Infra.Data.EntityConfiguration;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
-
 
 namespace DesafioRodonaves.Infra.Data.Context
 {
     public class ApplicationDbContext : DbContext
     {
-
         // Configura contexto do banco de dados
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> dbContext) : base(dbContext) { }
 
@@ -19,7 +16,6 @@ namespace DesafioRodonaves.Infra.Data.Context
 
         public DbSet<Collaborator> Collaborators { get; set; }
 
-
         // Realiza a aplicação automatica das configurações de entidades que são definidas nas pasta EntityConfiguration
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -28,7 +24,6 @@ namespace DesafioRodonaves.Infra.Data.Context
             builder.ApplyConfiguration(new CollaboratorConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new UnitConfiguration());
-
         }
     }
 }

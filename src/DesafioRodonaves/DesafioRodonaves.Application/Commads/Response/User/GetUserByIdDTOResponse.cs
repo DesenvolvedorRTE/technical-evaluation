@@ -1,5 +1,4 @@
-﻿
-using DesafioRodonaves.Domain.Commons;
+﻿using DesafioRodonaves.Domain.Commons;
 
 namespace DesafioRodonaves.Application.Commads.Response.User
 {

@@ -1,7 +1,6 @@
 ﻿using DesafioRodonaves.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Reflection.Emit;
 
 namespace DesafioRodonaves.Infra.Data.EntityConfiguration
 {
@@ -27,13 +26,11 @@ namespace DesafioRodonaves.Infra.Data.EntityConfiguration
                 .HasForeignKey(c => c.UnitId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-
             builder.HasOne(c => c.User)
                  .WithOne(u => u.Collaborator)
                  .HasForeignKey<Collaborator>(c => c.UserId)
                  .IsRequired()
                  .OnDelete(DeleteBehavior.Cascade);
-
         }
     }
 }

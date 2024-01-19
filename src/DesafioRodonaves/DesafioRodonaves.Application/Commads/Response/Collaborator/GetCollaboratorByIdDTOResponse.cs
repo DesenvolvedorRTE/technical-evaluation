@@ -1,6 +1,4 @@
-﻿
-
-using DesafioRodonaves.Domain.Commons;
+﻿using DesafioRodonaves.Domain.Commons;
 
 namespace DesafioRodonaves.Application.Commads.Response.Collaborator
 {
@@ -9,6 +7,5 @@ namespace DesafioRodonaves.Application.Commads.Response.Collaborator
         public string Name { get; set; }
         public int UnitId { get; set; }
         public int UserId { get; set; }
-
     }
 }

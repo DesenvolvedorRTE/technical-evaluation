@@ -2,7 +2,6 @@
 using DesafioRodonaves.Infra.Data.Repository;
 using Microsoft.Extensions.DependencyInjection;
 
-
 namespace DesafioRodonaves.Infra.Ioc.Repository
 {
     internal static class Startup
