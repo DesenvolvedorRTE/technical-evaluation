@@ -15,6 +15,9 @@ namespace DesafioRodonaves.Infra.Ioc.DbContext
             services.AddDbContext<ApplicationDbContext>(option =>
                 option.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
                     build => build.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+
+            // Adiciona serviços relacionados ao Entity Framework para migrações automáticas
+            services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
             return services;
 
         }
