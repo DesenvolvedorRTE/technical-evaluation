@@ -6,7 +6,7 @@ CRUD de gerenciamento de colaboradores e unidades.
 - C# - recomendado C# 12.
 - Net - recomendado .Net 8.
 - Docker desktop - ultima versão.
-- Windows Subsystem for Linux - recomando versão WSL2.
+- Windows Subsystem for Linux - recomendado versão WSL2.
 
 
 # Configurações
