@@ -1,14 +1,12 @@
-﻿using DesafioRodonaves.Application.Commads.Request.Unit;
-using DesafioRodonaves.Application.Commads.Request.User;
-using DesafioRodonaves.Application.Commads.Response.Unit;
+﻿using DesafioRodonaves.Application.Commads.Request.User;
 using DesafioRodonaves.Application.Commads.Response.User;
 using DesafioRodonaves.Application.Interfaces;
-using DesafioRodonaves.Application.Services;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DesafioRodonaves.MVC.Controllers
 {
+    [Authorize]
     [Route("api/")]
     [ApiController]
     public class UserController : ControllerBase

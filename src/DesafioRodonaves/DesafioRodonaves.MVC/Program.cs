@@ -31,14 +31,14 @@ var app = builder.Build();
         app.UseSwaggerUI();
         
     }
-    // Configuração de middlewares: GlobalException,
-    app.UseInfrastructure(builder.Configuration);
 
     app.UseHttpsRedirection();
     app.UseStaticFiles();
-
     app.UseRouting();
 
+    // Configuração de middlewares: GlobalException, Authentication, Authorization
+    app.UseInfrastructure(builder.Configuration);
+    app.UseAuthentication();
     app.UseAuthorization();
 
     app.MapControllers();

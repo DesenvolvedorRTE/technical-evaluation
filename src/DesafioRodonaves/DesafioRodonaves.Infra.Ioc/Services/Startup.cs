@@ -13,6 +13,7 @@ namespace DesafioRodonaves.Infra.Ioc.Services
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICollaboratorService, CollaboratorService>();
             services.AddScoped<IPasswordManager, PasswordManager>();
+            //services.AddScoped<TokenService>();
 
             return services;
         }

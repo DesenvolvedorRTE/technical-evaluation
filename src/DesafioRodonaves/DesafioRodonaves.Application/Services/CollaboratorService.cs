@@ -51,7 +51,7 @@ namespace DesafioRodonaves.Application.Services
                 // Criação do usuário
                 User user = new()
                 {
-                    Login = entity.User.Login,
+                    Login = entity.User.Login.ToLower(),
                     Password = entity.User.Password,
                     Status = entity.User.Status
                 };
@@ -147,7 +147,7 @@ namespace DesafioRodonaves.Application.Services
 
        
             if (!string.IsNullOrEmpty(entity.Name))
-                collaboratorId.Name = entity.Name;
+                collaboratorId.Name = entity.Name.ToLower();
 
             if (!string.IsNullOrEmpty(entity.UnitId.ToString()))
             {

@@ -1,10 +1,12 @@
 ﻿using DesafioRodonaves.Application.Commads.Request.Collaborator;
 using DesafioRodonaves.Application.Commads.Response.Collaborator;
 using DesafioRodonaves.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DesafioRodonaves.MVC.Controllers
 {
+    [Authorize]
     [Route("api/")]
     [ApiController]
     public class CollaboratorController : ControllerBase
@@ -16,6 +18,7 @@ namespace DesafioRodonaves.MVC.Controllers
             _collaboratorService = collaboratorService;
         }
 
+     
         [HttpGet("GetCollaboratorById/{id:int}")]
         public async Task<GetCollaboratorByIdDTOResponse> GetCollaboratorById(int id)
         {

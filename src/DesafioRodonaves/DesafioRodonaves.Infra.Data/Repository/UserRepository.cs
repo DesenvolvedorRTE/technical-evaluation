@@ -15,6 +15,11 @@ namespace DesafioRodonaves.Infra.Data.Repository
             _dbContext = dbContext;
         }
 
+        public async Task<User> CheckDataLogin(string login)
+        {
+            return await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(l => l.Login == login);
+        }
+
         public async Task<IEnumerable<User>> GetAllUserByStatus(bool status)
         {
             if (status == false)

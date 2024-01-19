@@ -14,5 +14,8 @@ namespace DesafioRodonaves.Application.Interfaces
 
         Task<IEnumerable<GetAllUserByStatusDTOResponse>> GetAllUserByStatus(bool status);
 
+        Task<LoginDTOResponse> Login(LoginDTORequest login);
+        
+
     }
 }

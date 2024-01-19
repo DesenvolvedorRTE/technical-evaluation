@@ -7,6 +7,8 @@ using DesafioRodonaves.Infra.Ioc.Services;
 using DesafioRodonaves.Infra.Ioc.Repository;
 using DesafioRodonaves.Infra.Ioc.GlobalExecptions;
 using Microsoft.AspNetCore.Builder;
+using DesafioRodonaves.Infra.Ioc.JWT;
+using DesafioRodonaves.Infra.Ioc.Swagger;
 
 namespace DesafioRodonaves.Infra.Ioc
 {
@@ -23,8 +25,11 @@ namespace DesafioRodonaves.Infra.Ioc
             services.AddServiceFluentValidation();
             services.AddServiceGlobalExecptions();
             services.AddServiceUnitOfWork();
-
             services.AddServices();
+
+            services.AddServiceJwtAuthenticationAndAutorization(configuration);
+
+            services.AddServiceSwagger();
 
             return services;
 

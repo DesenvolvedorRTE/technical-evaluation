@@ -17,14 +17,15 @@ namespace DesafioRodonaves.Application.Services
         private readonly IUnitOfWork<ApplicationDbContext> _uow;
         private readonly UserValidation _userValidator;
         private readonly IPasswordManager _passwordManger;
+        private readonly TokenService _tokenService;
 
-        public UserService(IUserRepository userRepository, IUnitOfWork<ApplicationDbContext> uow, 
-            UserValidation userValidator, IPasswordManager passwordManger)
+        public UserService(IUserRepository userRepository, IUnitOfWork<ApplicationDbContext> uow, UserValidation userValidator, IPasswordManager passwordManger, TokenService tokenService)
         {
             _userRepository = userRepository;
             _uow = uow;
             _userValidator = userValidator;
             _passwordManger = passwordManger;
+            _tokenService = tokenService;
         }
 
         public async Task<IEnumerable<GetAllUserDTOResponse>> GetAll()
@@ -75,6 +76,24 @@ namespace DesafioRodonaves.Application.Services
             return userStatus.Adapt<IEnumerable<GetAllUserByStatusDTOResponse>>();
         }
 
-      
+        public async Task<LoginDTOResponse> Login(LoginDTORequest request)
+        {
+            if (string.IsNullOrEmpty(request.Login) || string.IsNullOrEmpty(request.Password))
+                throw new BadRequestException("Dados inválidos");
+
+            var userLogin = await _userRepository.CheckDataLogin(request.Login.ToLower());
+            var verifyPassword = _passwordManger.VerifyPassword(userLogin.Password,request.Password);
+
+            if (userLogin is null)
+                throw new ForbiddenException("Usuário ou senha inválido.");
+
+            if (userLogin == null || verifyPassword == false)
+                throw new BadRequestException("Usuário ou senha inválido.");
+
+            // Gera o token de autenticação usando o serviço de token
+            var token = await _tokenService.GenerateToken(userLogin);
+
+            return new LoginDTOResponse() { Token = token };
+        }
     }
 }
