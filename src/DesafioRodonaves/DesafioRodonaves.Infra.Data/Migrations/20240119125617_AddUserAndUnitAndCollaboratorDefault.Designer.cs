@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DesafioRodonaves.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240118233939_AddCollboratorAndUserDefault")]
-    partial class AddCollboratorAndUserDefault
+    [Migration("20240119125617_AddUserAndUnitAndCollaboratorDefault")]
+    partial class AddUserAndUnitAndCollaboratorDefault
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -119,6 +119,10 @@ namespace DesafioRodonaves.Infra.Data.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("character varying(150)")
                         .HasColumnName("senha");
+
+                    b.Property<int>("Roles")
+                        .HasColumnType("integer")
+                        .HasColumnName("permissoes");
 
                     b.Property<bool?>("Status")
                         .IsRequired()

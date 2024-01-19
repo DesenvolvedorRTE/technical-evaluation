@@ -47,6 +47,7 @@ namespace DesafioRodonaves.Application.Services
             var claims = new ClaimsIdentity();
 
             claims.AddClaim(new Claim(ClaimTypes.Name, user.Login));
+            claims.AddClaim(new Claim(ClaimTypes.Role, user.Roles.ToString()));
 
             return claims;
         }

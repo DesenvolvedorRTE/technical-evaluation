@@ -117,6 +117,10 @@ namespace DesafioRodonaves.Infra.Data.Migrations
                         .HasColumnType("character varying(150)")
                         .HasColumnName("senha");
 
+                    b.Property<int>("Roles")
+                        .HasColumnType("integer")
+                        .HasColumnName("permissoes");
+
                     b.Property<bool?>("Status")
                         .IsRequired()
                         .ValueGeneratedOnAdd()

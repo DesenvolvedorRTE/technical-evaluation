@@ -1,4 +1,24 @@
-# Sistema de Gestão de Colaboradores e Unidades em C# com PostgreSQL
+# Desafio Rodonaves
+CRUD de gerenciamento de colaboradores e unidades.
+
+
+# Requisitos
+- C# - recomendado C# 12.
+- Net - recomendado .Net 8.
+- Docker desktop - ultima versão.
+- Windows Subsystem for Linux - recomando versão WSL2.
+
+
+# Configurações
+* Baixe aplicativo:
+* https://github.com/Rodrigovargasv/Rodrigovargasv-20240116.git
+* Use uma Idea .Net preferencialmente o Visual Studio.
+* Com o Docker instalado e configurado, vai até a raiz do projeto, antes da pasta SRC, e abra o caminho da pasta com a linha de comando.
+* Com terminal aberto digite o seguindo comando: **docker-compose up**
+* Execute o aplicativo usando a Idea:
+
+# Desafio:
+## Sistema de Gestão de Colaboradores e Unidades em C# com PostgreSQL
 
 Este é um projeto de backend que implementa um Sistema de Gestão de Colaboradores e Unidades, utilizando o PostgreSQL como banco de dados.
 
@@ -23,7 +43,7 @@ Este é um projeto de backend que implementa um Sistema de Gestão de Colaborado
 * Aplicar o pattern de herança.
 * Deve ser possível realizar os testes das funcionalidades via Postman ou similares.
 
-## Passos para envio da avaliação
+## **Passos para envio da avaliação**
 * Solicite acesso ao repositório.
 * Crie um fork da master para seu repositório com o seguinte nome: usuário do git e data, ex.: devrte-20231201.
 * Envie link do projeto criado para o email: desenvolvedor.rte@gmail.com com o título: [RTE] - Avaliação técnica / Seu Nome

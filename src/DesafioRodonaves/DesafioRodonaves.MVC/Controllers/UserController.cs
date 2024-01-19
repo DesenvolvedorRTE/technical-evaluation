@@ -18,25 +18,29 @@ namespace DesafioRodonaves.MVC.Controllers
             _userService = userService;
         }
 
+        [Authorize(Roles = "commonCollaborator, collaboratorAdministrator")]
         [HttpGet("GetUserById/{id:int}")]
         public async Task<GetUserByIdDTOResponse> GetUserById(int id)
         {
             return await _userService.GetById(id);
         }
 
+        [Authorize(Roles = "commonCollaborator, collaboratorAdministrator")]
         [HttpGet("GetAllUser")]
         public async Task<IEnumerable<GetAllUserDTOResponse>> GetAllUser()
         {
             return await _userService.GetAll();
         }
 
+        [Authorize(Roles = "commonCollaborator, collaboratorAdministrator")]
         [HttpPut("UpdateUser/{id:int}")]
         public async Task<string> UpdateUser([FromBody] UpdateUserDTORequest user, int id)
         {
             return await _userService.Update(user, id);
-        } 
+        }
 
-        [HttpPut("GetAllUserByStatus/{status:bool}")]
+        [Authorize(Roles = "collaboratorAdministrator")]
+        [HttpGet("GetAllUserByStatus/{status:bool}")]
         public async Task<IEnumerable<GetAllUserByStatusDTOResponse>> GetAllUserByStatus(bool status)
         {
             return await _userService.GetAllUserByStatus(status);

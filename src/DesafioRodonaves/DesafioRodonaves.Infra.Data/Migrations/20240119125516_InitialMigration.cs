@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DesafioRodonaves.Infra.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreateDataBase : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,7 +34,8 @@ namespace DesafioRodonaves.Infra.Data.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nome_do_usuario = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     senha = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
-                    status = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true)
+                    status = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
+                    permissoes = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

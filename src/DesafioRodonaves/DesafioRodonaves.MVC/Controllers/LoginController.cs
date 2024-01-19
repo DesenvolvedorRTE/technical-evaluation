@@ -2,7 +2,6 @@
 using DesafioRodonaves.Application.Commads.Response.User;
 using DesafioRodonaves.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DesafioRodonaves.MVC.Controllers

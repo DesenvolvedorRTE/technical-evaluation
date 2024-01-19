@@ -53,7 +53,8 @@ namespace DesafioRodonaves.Application.Services
                 {
                     Login = entity.User.Login.ToLower(),
                     Password = entity.User.Password,
-                    Status = entity.User.Status
+                    Status = entity.User.Status,
+                    Roles = entity.User.Role
                 };
 
                 // Validação do colaborador

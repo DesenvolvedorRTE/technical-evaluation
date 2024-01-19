@@ -25,6 +25,10 @@ namespace DesafioRodonaves.Domain.Validations
             RuleFor(x => x.Status)
               .NotEmpty()
               .NotNull();
+
+            RuleFor(x => x.Roles)
+                .NotEmpty()
+                .NotNull();
         }
     }
 }

@@ -35,6 +35,13 @@ namespace DesafioRodonaves.Infra.Ioc.JWT
                    };
                });
 
+            // Configura os perfis de acesso aceitos pela aplicação
+            services.AddAuthorization(option =>
+            {
+                option.AddPolicy("commonCollaborator", p => p.RequireRole("commonCollaborator"));
+                option.AddPolicy("collaboratorAdministrator", p => p.RequireRole("collaboratorAdministrator"));
+            });
+
             return services;
         }
     }

@@ -23,6 +23,8 @@ namespace DesafioRodonaves.Infra.Data.EntityConfiguration
 
             builder.Property(x => x.Status).IsRequired().HasDefaultValue(true).HasColumnName("status");
 
+            builder.Property(x => x.Roles).IsRequired().HasColumnName("permissoes");
+
 
             builder.HasIndex(x => x.Login).IsUnique();
 
